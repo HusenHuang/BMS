@@ -1,11 +1,10 @@
-package com.limaila.bms.tool.controller;
+package com.limaila.bms.authority.controller;
 
 import com.google.common.collect.Maps;
 import com.limaila.bms.common.response.RSP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +21,6 @@ import java.util.Map;
 @RequestMapping("/helloworld")
 public class HelloWorldController {
 
-    @Value("${h1}")
     private String h1;
 
     @Autowired

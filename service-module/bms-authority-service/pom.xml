@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bms-tool-service</artifactId>
-
+    <artifactId>bms-authority-service</artifactId>
 
     <dependencies>
         <dependency>

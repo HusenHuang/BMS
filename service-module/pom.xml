@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>bms-tool-service</module>
+        <module>bms-authority-service</module>
     </modules>
 
 

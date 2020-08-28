@@ -15,6 +15,7 @@
         <module>bms-common</module>
         <module>bms-feign-framework</module>
         <module>bms-web</module>
+        <module>bms-kubernetes</module>
     </modules>
 
 
