@@ -11,6 +11,9 @@
 
     <artifactId>service-module</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>bms-tool-service</module>
+    </modules>
 
 
 </project>

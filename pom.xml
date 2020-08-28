@@ -21,9 +21,9 @@
         <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
-        <spring-boot-admin.version>2.2.2</spring-boot-admin.version>
+        <springcloud.kubernetes.version>1.1.5.RELEASE</springcloud.kubernetes.version>
         <fastjson.version>1.2.62</fastjson.version>
-        <apollo.version>1.6.0</apollo.version>
+        <apollo.version>1.7.0</apollo.version>
         <revision>1.0.1</revision>
     </properties>
 
