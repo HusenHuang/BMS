@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: momo-system
+  name: bms-authority-service
+  labels:
+    app: bms-authority-service
+spec:
+  # port是绑定在10.200.102.249的端口，targetPort是容器POD的端口
+  ports:
+    - name: http
+      port: 81
+      targetPort: 80
+      protocol: TCP
+  externalIPs:
+    - 10.200.102.249
+  selector:
+    app: bms-authority-service
+  type: NodePort

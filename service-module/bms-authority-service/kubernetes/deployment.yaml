@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bms-authority-service
+  labels:
+    app: momo-appRollingUpdate
+  namespace: momo-system
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bms-authority-service
+  minReadySeconds: 60
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: bms-authority-service
+    spec:
+      terminationGracePeriodSeconds: 300
+      containers:
+        - name: bms-authority-service
+          image: bms-authority-service:1.0
+          ports:
+            - name: http
+              containerPort: 80
+          env:
+            - name: JAVA_OPTS
+              value: "
+              -Xms1024m -Xmx1024m
+              -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m -Xss1M \
+              -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=5 -XX:PretenureSizeThreshold=1M \
+              -XX:+UseParNewGC  -XX:+UseConcMarkSweepGC \
+              -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -Xloggc:gc_log/gc.log \
+              -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=oom_log/oom.hprof
+              "
+            - name: SPRING_BOOT_OPTS
+              value: " --spring.profiles.active=qc"
+            - name: SERVER_ENV
+              value: "QC"
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          volumeMounts:
+            - mountPath: /etc/localtime
+              name: tz-config
+      volumes:
+        - hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
+          name: tz-config
