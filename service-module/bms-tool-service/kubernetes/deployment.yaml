@@ -6,7 +6,7 @@ metadata:
     app: momo-appRollingUpdate
   namespace: momo-system
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: bms-tool-service
