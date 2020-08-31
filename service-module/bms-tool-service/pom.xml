@@ -27,7 +27,7 @@
 
         <dependency>
             <groupId>com.limaila</groupId>
-            <artifactId>bms-kubernetes</artifactId>
+            <artifactId>bms-discovery-kubernetes</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>

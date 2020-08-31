@@ -11,6 +11,7 @@
         <module>api-module</module>
         <module>service-module</module>
         <module>framework-module</module>
+        <module>gateway-module</module>
     </modules>
     <packaging>pom</packaging>
 

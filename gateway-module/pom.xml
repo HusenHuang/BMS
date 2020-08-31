@@ -9,14 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>framework-module</artifactId>
+    <artifactId>gateway-module</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>bms-common</module>
-        <module>bms-feign-framework</module>
-        <module>bms-web</module>
-        <module>bms-discovery-nacos</module>
-        <module>bms-discovery-kubernetes</module>
+        <module>bms-gateway</module>
     </modules>
 
 
