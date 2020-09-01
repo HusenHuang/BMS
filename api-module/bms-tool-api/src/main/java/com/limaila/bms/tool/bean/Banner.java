@@ -2,6 +2,7 @@ package com.limaila.bms.tool.bean;
 
 import com.limaila.bms.common.bean.BaseDateTime;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /***
  说明: 
@@ -12,7 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Builder
+@SuperBuilder
 @Getter
 @Setter
 public class Banner extends BaseDateTime {
