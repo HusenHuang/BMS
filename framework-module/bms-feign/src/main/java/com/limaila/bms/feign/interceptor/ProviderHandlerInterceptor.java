@@ -1,4 +1,4 @@
-package com.limaila.bms.framework.feign;
+package com.limaila.bms.feign.interceptor;
 
 import com.alibaba.fastjson.JSON;
 import com.limaila.bms.common.constants.HeaderConstant;

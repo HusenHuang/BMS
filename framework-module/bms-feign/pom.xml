@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bms-feign-framework</artifactId>
+    <artifactId>bms-feign</artifactId>
 
     <dependencies>
         <dependency>
@@ -22,9 +22,10 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
+        <!-- feign client-->
         <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-core</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
         <dependency>
