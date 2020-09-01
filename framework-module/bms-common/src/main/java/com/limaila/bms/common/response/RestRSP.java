@@ -1,6 +1,6 @@
 package com.limaila.bms.common.response;
 
-import com.limaila.bms.common.constants.RCode;
+import com.limaila.bms.common.constants.RestCode;
 import com.limaila.bms.common.context.RequestContextHolder;
 import lombok.*;
 
@@ -18,11 +18,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RSP implements Serializable {
+public class RestRSP implements Serializable {
 
 
     /**
-     * {@link RCode}
+     * {@link RestCode}
      * 请求失败返回的错误码
      */
     private Integer code;
@@ -64,8 +64,8 @@ public class RSP implements Serializable {
      * @param data 响应数据
      * @return 响应体
      */
-    public static RSP success(Object data) {
-        return of(RCode.SUCCESS.getCode(), RCode.SUCCESS.getMsg(), RCode.SUCCESS.getCode(), RCode.SUCCESS.getMsg(), data);
+    public static RestRSP success(Object data) {
+        return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), data);
     }
 
     /**
@@ -73,8 +73,8 @@ public class RSP implements Serializable {
      *
      * @return 响应体
      */
-    public static RSP success() {
-        return of(RCode.SUCCESS.getCode(), RCode.SUCCESS.getMsg(), RCode.SUCCESS.getCode(), RCode.SUCCESS.getMsg());
+    public static RestRSP success() {
+        return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg());
     }
 
 
@@ -85,8 +85,8 @@ public class RSP implements Serializable {
      * @param subMsg  子错误信息
      * @return
      */
-    public static RSP business(int subCode, String subMsg) {
-        return of(RCode.BUSINESS_FAILED.getCode(), RCode.BUSINESS_FAILED.getMsg(),
+    public static RestRSP business(int subCode, String subMsg) {
+        return of(RestCode.BUSINESS_FAILED.getCode(), RestCode.BUSINESS_FAILED.getMsg(),
                 subCode, subMsg);
     }
 
@@ -95,9 +95,9 @@ public class RSP implements Serializable {
      *
      * @return
      */
-    public static RSP fallback() {
-        return of(RCode.FALLBACK_FAILED.getCode(), RCode.FALLBACK_FAILED.getMsg(),
-                RCode.FALLBACK_FAILED.getCode(), RCode.FALLBACK_FAILED.getMsg());
+    public static RestRSP fallback() {
+        return of(RestCode.FALLBACK_FAILED.getCode(), RestCode.FALLBACK_FAILED.getMsg(),
+                RestCode.FALLBACK_FAILED.getCode(), RestCode.FALLBACK_FAILED.getMsg());
     }
 
 
@@ -106,9 +106,9 @@ public class RSP implements Serializable {
      *
      * @return
      */
-    public static RSP restrict() {
-        return of(RCode.RESTRICT_FAILED.getCode(), RCode.RESTRICT_FAILED.getMsg(),
-                RCode.RESTRICT_FAILED.getCode(), RCode.RESTRICT_FAILED.getMsg());
+    public static RestRSP restrict() {
+        return of(RestCode.RESTRICT_FAILED.getCode(), RestCode.RESTRICT_FAILED.getMsg(),
+                RestCode.RESTRICT_FAILED.getCode(), RestCode.RESTRICT_FAILED.getMsg());
     }
 
 
@@ -122,8 +122,8 @@ public class RSP implements Serializable {
      * @param data    响应数据
      * @return
      */
-    public static RSP of(int code, String msg, int subCode, String subMsg, Object data) {
-        return RSP.builder()
+    public static RestRSP of(int code, String msg, int subCode, String subMsg, Object data) {
+        return RestRSP.builder()
                 .code(code)
                 .msg(msg)
                 .subCode(subCode)
@@ -144,7 +144,7 @@ public class RSP implements Serializable {
      * @param subMsg  子错误信息
      * @return
      */
-    public static RSP of(int code, String msg, int subCode, String subMsg) {
+    public static RestRSP of(int code, String msg, int subCode, String subMsg) {
         return of(code, msg, subCode, subMsg, null);
     }
 

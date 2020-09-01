@@ -11,7 +11,7 @@ import lombok.Getter;
  ***/
 @AllArgsConstructor
 @Getter
-public enum RCode {
+public enum RestCode {
 
     /**
      * SUCCESS

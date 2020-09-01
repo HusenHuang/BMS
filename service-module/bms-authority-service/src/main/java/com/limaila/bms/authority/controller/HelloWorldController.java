@@ -1,9 +1,11 @@
 package com.limaila.bms.authority.controller;
 
 import com.google.common.collect.Maps;
-import com.limaila.bms.common.response.RSP;
+import com.limaila.bms.common.response.ApiRsp;
+import com.limaila.bms.common.response.RestRSP;
+import com.limaila.bms.tool.api.IBannerClient;
+import com.limaila.bms.tool.bean.Banner;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,13 +28,18 @@ public class HelloWorldController {
     @Autowired
     private DiscoveryClient discoveryClient;
 
+    @Autowired
+    private IBannerClient bannerClient;
+
     @RequestMapping
-    public RSP index() {
+    public RestRSP index() {
         List<String> services = discoveryClient.getServices();
+        ApiRsp<List<Banner>> banners = bannerClient.getBannerList();
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("h1", h1);
         map.put("services", services);
-        return RSP.success(map);
+        map.put("banners", banners);
+        return RestRSP.success(map);
     }
 
 }

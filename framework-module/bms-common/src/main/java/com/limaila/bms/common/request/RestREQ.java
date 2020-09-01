@@ -16,7 +16,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class REQ<T> implements Serializable {
+public class RestREQ<T> implements Serializable {
 
     /**
      * 请求数据

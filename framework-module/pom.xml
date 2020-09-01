@@ -17,6 +17,7 @@
         <module>bms-web</module>
         <module>bms-discovery-nacos</module>
         <module>bms-discovery-kubernetes</module>
+        <module>bms-breaker-sentinel</module>
     </modules>
 
 

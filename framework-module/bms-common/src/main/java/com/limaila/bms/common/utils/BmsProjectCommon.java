@@ -1,0 +1,14 @@
+package com.limaila.bms.common.utils;
+
+/***
+ 说明: 
+ @author MrHuang
+ @date 2020/9/1 19:26
+ @desc
+ ***/
+public interface BmsProjectCommon {
+
+    String BMS_TOOL_SERVICE = "bms_tool_service";
+
+    String BMS_AUTHORITY_SERVICE = "bms_authority_service";
+}

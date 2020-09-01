@@ -1,11 +1,10 @@
 package com.limaila.bms.tool.controller;
 
 import com.google.common.collect.Maps;
-import com.limaila.bms.common.response.RSP;
+import com.limaila.bms.common.response.RestRSP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,12 +28,12 @@ public class HelloWorldController {
     private DiscoveryClient discoveryClient;
 
     @RequestMapping
-    public RSP index() {
+    public RestRSP index() {
         List<String> services = discoveryClient.getServices();
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("h1", h1);
         map.put("services", services);
-        return RSP.success(map);
+        return RestRSP.success(map);
     }
 
 }
