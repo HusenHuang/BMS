@@ -35,11 +35,11 @@ public class HelloWorldController {
     @RequestMapping
     public RestRSP index() {
         List<String> services = discoveryClient.getServices();
-        ApiRsp<List<Banner>> banners = bannerClient.getBannerList();
+        ApiRsp<List<Banner>> rsp = bannerClient.getBannerList();
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("h1", h1);
         map.put("services", services);
-        map.put("banners", banners);
+        map.put("rsp", rsp);
         map.put("nodeName", BmsEnvCommon.getNodeName());
         map.put("podIp", BmsEnvCommon.getPodIp());
         map.put("serverEnv", BmsEnvCommon.getServerEnv());
