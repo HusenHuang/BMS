@@ -8,7 +8,7 @@ package com.limaila.bms.common.utils;
  ***/
 public interface BmsProjectCommon {
 
-    String BMS_TOOL_SERVICE = "bms-tool-service.momo-system.svc.cluster.local";
+    String BMS_TOOL_SERVICE = "bms-tool-service";
 
     String BMS_AUTHORITY_SERVICE = "bms-authority-service";
 }
