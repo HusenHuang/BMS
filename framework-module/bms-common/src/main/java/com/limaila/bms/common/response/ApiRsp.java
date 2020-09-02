@@ -1,5 +1,6 @@
 package com.limaila.bms.common.response;
 
+import com.limaila.bms.common.utils.BmsEnvCommon;
 import lombok.*;
 
 import java.io.Serializable;
@@ -21,7 +22,20 @@ public class ApiRsp<T> implements Serializable {
     /**
      * 是否熔断
      */
-    private boolean isFallBack;
+    @Builder.Default
+    private boolean isFallBack = false;
+
+    /**
+     * 提供方IP
+     */
+    @Builder.Default
+    private String providerIp = BmsEnvCommon.getPodIp();
+
+    /**
+     * 提供方NodeName
+     */
+    @Builder.Default
+    private String providerNodeName = BmsEnvCommon.getNodeName();
 
     /**
      * 数据
