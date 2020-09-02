@@ -31,7 +31,7 @@ spec:
           env:
             - name: JAVA_OPTS
               value: "
-              -Xms1024m -Xmx1024m
+              -Xms1024m -Xmx1024m \
               -XX:MetaspaceSize=256m -XX:MaxMetaspaceSize=256m -Xss1M \
               -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=5 -XX:PretenureSizeThreshold=1M \
               -XX:+UseParNewGC  -XX:+UseConcMarkSweepGC \
