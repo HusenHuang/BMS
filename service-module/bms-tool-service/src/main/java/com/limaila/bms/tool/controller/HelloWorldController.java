@@ -2,6 +2,7 @@ package com.limaila.bms.tool.controller;
 
 import com.google.common.collect.Maps;
 import com.limaila.bms.common.response.RestRSP;
+import com.limaila.bms.common.utils.BmsEnvCommon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -33,6 +34,9 @@ public class HelloWorldController {
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("h1", h1);
         map.put("services", services);
+        map.put("nodeName", BmsEnvCommon.getNodeName());
+        map.put("podIp", BmsEnvCommon.getPodIp());
+        map.put("serverEnv", BmsEnvCommon.getServerEnv());
         return RestRSP.success(map);
     }
 
