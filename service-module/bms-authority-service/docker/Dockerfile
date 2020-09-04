@@ -20,6 +20,6 @@ COPY --from=builder application/snapshot-dependencies/ ./
 
 ENTRYPOINT java \
            -Duser.timezone=GMT+8 \
-           ${JAVA_OPS} \
+           ${JAVA_OPTS} \
            org.springframework.boot.loader.JarLauncher \
-           ${SPRING_BOOT_OPS}
+           ${SPRING_BOOT_OPTS}
