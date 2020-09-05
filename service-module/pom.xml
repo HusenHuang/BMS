@@ -24,9 +24,6 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <fork>true</fork>
-                    <layers>
-                        <enabled>true</enabled>
-                    </layers>
                 </configuration>
                 <executions>
                     <execution>

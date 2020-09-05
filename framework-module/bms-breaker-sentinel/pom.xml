@@ -11,5 +11,16 @@
 
     <artifactId>bms-breaker-sentinel</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-apollo</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
