@@ -8,8 +8,10 @@ import org.springframework.cloud.openfeign.FeignClient;
  @author MrHuang
  @date 2020/9/1 19:24
  @desc
+
+ Spring Cloud Feign 整合 sentinel写法
  ***/
-@FeignClient(name = BmsProjectCommon.BMS_TOOL_SERVICE, fallbackFactory = BannerClientFallbackFactory.class)
+@FeignClient(name = BmsProjectCommon.BMS_TOOL_SERVICE)
 public interface IBannerClient extends IBannerApi {
 
 

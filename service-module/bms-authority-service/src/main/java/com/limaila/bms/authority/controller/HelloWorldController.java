@@ -1,9 +1,11 @@
 package com.limaila.bms.authority.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.google.common.collect.Maps;
 import com.limaila.bms.common.response.ApiRsp;
 import com.limaila.bms.common.response.RestRSP;
 import com.limaila.bms.common.utils.BmsEnvCommon;
+import com.limaila.bms.common.utils.BmsSentinelRouteCommon;
 import com.limaila.bms.tool.api.IBannerClient;
 import com.limaila.bms.tool.bean.Banner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,7 @@ public class HelloWorldController {
     @Autowired
     private IBannerClient bannerClient;
 
+    @SentinelResource(value = BmsSentinelRouteCommon.BMS_AUTHORITY_HELLO_WORLD_INDEX)
     @RequestMapping
     public RestRSP index() {
         List<String> services = discoveryClient.getServices();

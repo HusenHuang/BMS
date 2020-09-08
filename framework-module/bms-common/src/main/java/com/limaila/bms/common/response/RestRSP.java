@@ -33,14 +33,9 @@ public class RestRSP implements Serializable {
     private String msg;
 
     /**
-     * 请求失败返回的子错误码
+     * 请求失败返回的错误备注
      */
-    private Integer subCode;
-
-    /**
-     * 请求失败返回的子错误信息
-     */
-    private String subMsg;
+    private String remark;
 
     /**
      * 日志id
@@ -65,7 +60,7 @@ public class RestRSP implements Serializable {
      * @return 响应体
      */
     public static RestRSP success(Object data) {
-        return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), data);
+        return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), null, data);
     }
 
     /**
@@ -74,60 +69,28 @@ public class RestRSP implements Serializable {
      * @return 响应体
      */
     public static RestRSP success() {
-        return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg());
+        return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), null, null);
     }
 
 
-    /**
-     * 业务失败
-     *
-     * @param subCode 子错误码
-     * @param subMsg  子错误信息
-     * @return
-     */
-    public static RestRSP business(int subCode, String subMsg) {
-        return of(RestCode.BUSINESS_FAILED.getCode(), RestCode.BUSINESS_FAILED.getMsg(),
-                subCode, subMsg);
+    public static RestRSP systemFailed(String remark) {
+        return of(RestCode.SYSTEM_FAILED.getCode(), RestCode.SYSTEM_FAILED.getMsg(), remark, null);
     }
-
-    /**
-     * 网关熔断
-     *
-     * @return
-     */
-    public static RestRSP fallback() {
-        return of(RestCode.FALLBACK_FAILED.getCode(), RestCode.FALLBACK_FAILED.getMsg(),
-                RestCode.FALLBACK_FAILED.getCode(), RestCode.FALLBACK_FAILED.getMsg());
-    }
-
-
-    /**
-     * 网关限流
-     *
-     * @return
-     */
-    public static RestRSP restrict() {
-        return of(RestCode.RESTRICT_FAILED.getCode(), RestCode.RESTRICT_FAILED.getMsg(),
-                RestCode.RESTRICT_FAILED.getCode(), RestCode.RESTRICT_FAILED.getMsg());
-    }
-
 
     /**
      * 响应
      *
-     * @param code    错误码
-     * @param msg     错误信息
-     * @param subCode 子错误码
-     * @param subMsg  子错误信息
-     * @param data    响应数据
+     * @param code   错误码
+     * @param msg    错误信息
+     * @param remark 错误备注
+     * @param data   响应数据
      * @return
      */
-    public static RestRSP of(int code, String msg, int subCode, String subMsg, Object data) {
+    public static RestRSP of(int code, String msg, String remark, Object data) {
         return RestRSP.builder()
                 .code(code)
                 .msg(msg)
-                .subCode(subCode)
-                .subMsg(subMsg)
+                .remark(remark)
                 .data(data)
                 .serverTime(System.currentTimeMillis())
                 .requestId(RequestContextHolder.getContext().getRequestId())
@@ -138,14 +101,13 @@ public class RestRSP implements Serializable {
     /**
      * 响应
      *
-     * @param code    错误码
-     * @param msg     错误信息
-     * @param subCode 子错误码
-     * @param subMsg  子错误信息
+     * @param code   错误码
+     * @param msg    错误信息
+     * @param remark 错误备注
      * @return
      */
-    public static RestRSP of(int code, String msg, int subCode, String subMsg) {
-        return of(code, msg, subCode, subMsg, null);
+    public static RestRSP of(int code, String msg, String remark) {
+        return of(code, msg, remark, null);
     }
 
 }

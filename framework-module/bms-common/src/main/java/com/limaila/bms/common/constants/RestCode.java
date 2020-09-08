@@ -24,14 +24,9 @@ public enum RestCode {
     BUSINESS_FAILED(1, "BUSINESS_FAILED"),
 
     /**
-     * 网关熔断
+     * 系统异常
      */
-    FALLBACK_FAILED(2, "FALLBACK_FAILED"),
-
-    /**
-     * 网关限流
-     */
-    RESTRICT_FAILED(3, "RESTRICT_FAILED"),
+    SYSTEM_FAILED(2, "SYSTEM_FAILED"),
 
     ;
 
