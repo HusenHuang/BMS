@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: helloworld
+          predicates:
+            - Path=/helloworld
+          uri: lb://bms-authority-service
