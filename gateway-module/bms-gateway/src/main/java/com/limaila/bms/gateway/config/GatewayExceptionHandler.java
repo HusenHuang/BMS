@@ -49,7 +49,7 @@ public class GatewayExceptionHandler extends DefaultErrorWebExceptionHandler {
     protected Map<String, Object> getErrorAttributes(ServerRequest request, boolean includeStackTrace) {
         Map<String, Object> response;
         Throwable error = super.getError(request);
-        log.error("网关全局捕获异常", error);
+        log.error("GatewayExceptionHandler ", error);
         if (error instanceof ResponseStatusException) {
             response = buildStatusResponse(((ResponseStatusException) error).getStatus());
         } else if (error instanceof org.springframework.cloud.gateway.support.TimeoutException) {
