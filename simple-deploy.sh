@@ -1,5 +1,8 @@
-# 1.拉取代码
-git clone https://github.com/husenhuang/bms
+# 1.停止当前实例
+cd /worker/git-worker/BMS
+kubectl delete -f service-module/bms-tool-service/kubernetes/
+kubectl delete -f service-module/bms-authority-service/kubernetes/
+kubectl delete -f gateway-module/bms-gateway/kubernetes/
 
 # 2.编译打包
 mvn clean install -Dmaven.test.skip=true
