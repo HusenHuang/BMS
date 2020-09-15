@@ -35,7 +35,7 @@ public class ProviderHandlerInterceptor implements HandlerInterceptor {
             }
             RequestContextHolder.setContext(JSON.parseObject(context, RequestContext.class));
         } else {
-            RequestContextHolder.setContext(new RequestContext());
+            RequestContextHolder.setContext(RequestContext.newInstance());
         }
         return true;
     }
