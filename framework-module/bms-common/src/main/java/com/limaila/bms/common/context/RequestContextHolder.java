@@ -11,7 +11,7 @@ public class RequestContextHolder {
     /**
      * 分布式调用上下文
      */
-    private static final ThreadLocal<RequestContext> CONTEXT = ThreadLocal.withInitial(RequestContext::new);
+    private static final ThreadLocal<RequestContext> CONTEXT = ThreadLocal.withInitial(RequestContext::newInstance);
 
 
     /**

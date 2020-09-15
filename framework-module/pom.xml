@@ -18,6 +18,7 @@
         <module>bms-discovery-kubernetes</module>
         <module>bms-breaker-sentinel</module>
         <module>bms-feign</module>
+        <module>bms-jwt</module>
     </modules>
 
 

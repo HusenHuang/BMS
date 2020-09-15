@@ -33,6 +33,12 @@
             <artifactId>bms-common</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.limaila</groupId>
+            <artifactId>bms-jwt</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

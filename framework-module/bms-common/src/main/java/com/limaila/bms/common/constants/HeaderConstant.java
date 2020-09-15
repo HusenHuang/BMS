@@ -18,4 +18,7 @@ public class HeaderConstant {
      */
     public static final  String HEADER_AUTHORIZATION = "Authorization";
 
+
+    public static final String HEADER_USER_KEY = "USER_KEY";
+
 }

@@ -1,7 +1,10 @@
 package com.limaila.bms.common.context;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /***
@@ -13,14 +16,18 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-@Builder
-@AllArgsConstructor
-public class RequestContext {
+public class RequestContext implements Serializable {
 
     /**
      * 请求ID
      */
     private String requestId;
+
+
+    /**
+     * 用户标识
+     */
+    private String userKey;
 
     /**
      * 请求IP
@@ -42,7 +49,14 @@ public class RequestContext {
      */
     private String os;
 
-    public RequestContext() {
-        this.requestId = UUID.randomUUID().toString();
+    private RequestContext() {
+
+    }
+
+    public static RequestContext newInstance() {
+        RequestContext rc = new RequestContext();
+        rc.setRequestId(UUID.randomUUID().toString());
+        RequestContextHolder.setContext(rc);
+        return rc;
     }
 }
