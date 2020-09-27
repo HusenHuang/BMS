@@ -19,14 +19,9 @@ public enum RestCode {
     SUCCESS(0, "SUCCESS"),
 
     /**
-     * 业务异常
-     */
-    BUSINESS_FAILED(1, "BUSINESS_FAILED"),
-
-    /**
      * 系统异常
      */
-    SYSTEM_FAILED(2, "SYSTEM_FAILED"),
+    FAILED(2, "FAILED"),
 
     ;
 

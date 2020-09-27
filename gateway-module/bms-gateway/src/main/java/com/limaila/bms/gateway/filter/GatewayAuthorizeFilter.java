@@ -73,7 +73,7 @@ public class GatewayAuthorizeFilter implements GlobalFilter, Ordered {
         // 获取登录标识
         String authorization = request.getHeaders().getFirst(HeaderConstant.HEADER_AUTHORIZATION);
         if (StringUtils.isBlank(authorization)) {
-            return WebFluxUtils.writeToMono(response, RestRSP.systemFailed("非法请求"));
+            return WebFluxUtils.writeToMono(response, RestRSP.failed("非法请求"));
         }
 
         // 解析登录标识
@@ -86,7 +86,7 @@ public class GatewayAuthorizeFilter implements GlobalFilter, Ordered {
             mutate.header(HeaderConstant.HEADER_USER_KEY, userKey);
         } catch (Exception e) {
             log.error("[AuthorizeFilter] 无法解析 authorization = '" + authorization + "'", e);
-            return WebFluxUtils.writeToMono(response, RestRSP.systemFailed("解析异常"));
+            return WebFluxUtils.writeToMono(response, RestRSP.failed("解析异常"));
         }
 
         ServerWebExchange mutableExchange = exchange.mutate().request(mutate.build()).build();

@@ -1,9 +1,8 @@
 package com.limaila.bms.tool.api.impl;
 
-import com.limaila.bms.common.response.ApiRsp;
-import com.limaila.bms.tool.api.IBannerApi;
+import com.limaila.bms.common.response.RestRSP;
+import com.limaila.bms.tool.api.IBannerMapping;
 import com.limaila.bms.tool.bean.Banner;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -19,10 +18,10 @@ import java.util.Random;
  @desc
  ***/
 @RestController
-public class BannerApi implements IBannerApi {
+public class BannerApi implements IBannerMapping {
 
     @Override
-    public ApiRsp<List<Banner>> getBannerList() {
+    public RestRSP<List<Banner>> getBannerList() {
         List<Banner> bannerList = new ArrayList<>();
         bannerList.add(Banner.builder()
                 .id((long) new Random().nextInt(100))
@@ -30,6 +29,7 @@ public class BannerApi implements IBannerApi {
                 .name(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .url("http://www.baidu.com")
                 .build());
-        return ApiRsp.<List<Banner>>builder().data(bannerList).build();
+
+        return RestRSP.success(bannerList);
     }
 }

@@ -1,16 +1,14 @@
 package com.limaila.bms.common.bean;
 
 import lombok.*;
-import lombok.experimental.Accessors;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /***
  说明: 
  @author MrHuang
- @date 2020/3/24 11:39
+ @date 2020/9/27 14:45
  @desc
  ***/
 @AllArgsConstructor
@@ -19,7 +17,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @Getter
 @Setter
-public class BaseDateTime implements Serializable {
+public class BaseObject implements Serializable {
 
     /**
      * 创建时间
@@ -30,4 +28,5 @@ public class BaseDateTime implements Serializable {
      * 更新时间
      */
     private String updateTime;
+
 }

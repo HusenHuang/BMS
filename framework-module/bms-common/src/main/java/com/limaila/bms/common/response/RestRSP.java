@@ -18,7 +18,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RestRSP implements Serializable {
+public class RestRSP<T> implements Serializable {
 
 
     /**
@@ -45,7 +45,7 @@ public class RestRSP implements Serializable {
     /**
      * 响应具体数据
      */
-    private Object data;
+    private T data;
 
     /**
      * 服务器当前时间
@@ -59,7 +59,7 @@ public class RestRSP implements Serializable {
      * @param data 响应数据
      * @return 响应体
      */
-    public static RestRSP success(Object data) {
+    public static <T> RestRSP success(T data) {
         return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), null, data);
     }
 
@@ -73,8 +73,14 @@ public class RestRSP implements Serializable {
     }
 
 
-    public static RestRSP systemFailed(String remark) {
-        return of(RestCode.SYSTEM_FAILED.getCode(), RestCode.SYSTEM_FAILED.getMsg(), remark, null);
+    /**
+     * 响应失败
+     *
+     * @param remark 备注
+     * @return
+     */
+    public static RestRSP failed(String remark) {
+        return of(RestCode.FAILED.getCode(), RestCode.FAILED.getMsg(), remark, null);
     }
 
     /**
@@ -86,7 +92,7 @@ public class RestRSP implements Serializable {
      * @param data   响应数据
      * @return
      */
-    public static RestRSP of(int code, String msg, String remark, Object data) {
+    private static <T> RestRSP of(int code, String msg, String remark, T data) {
         return RestRSP.builder()
                 .code(code)
                 .msg(msg)
@@ -106,7 +112,7 @@ public class RestRSP implements Serializable {
      * @param remark 错误备注
      * @return
      */
-    public static RestRSP of(int code, String msg, String remark) {
+    private static RestRSP of(int code, String msg, String remark) {
         return of(code, msg, remark, null);
     }
 

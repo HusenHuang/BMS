@@ -2,11 +2,10 @@ package com.limaila.bms.authority.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.google.common.collect.Maps;
-import com.limaila.bms.common.response.ApiRsp;
 import com.limaila.bms.common.response.RestRSP;
 import com.limaila.bms.common.utils.BmsEnvCommon;
 import com.limaila.bms.common.utils.BmsSentinelRouteCommon;
-import com.limaila.bms.tool.api.IBannerClient;
+import com.limaila.bms.tool.api.IBannerApi;
 import com.limaila.bms.tool.bean.Banner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -32,13 +31,13 @@ public class HelloWorldController {
     private DiscoveryClient discoveryClient;
 
     @Autowired
-    private IBannerClient bannerClient;
+    private IBannerApi bannerClient;
 
     @SentinelResource(value = BmsSentinelRouteCommon.BMS_AUTHORITY_HELLO_WORLD_INDEX)
     @RequestMapping
     public RestRSP index() {
         List<String> services = discoveryClient.getServices();
-        ApiRsp<List<Banner>> rsp = bannerClient.getBannerList();
+        RestRSP<List<Banner>> rsp = bannerClient.getBannerList();
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("h1", h1);
         map.put("services", services);

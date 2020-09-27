@@ -36,9 +36,9 @@ public class GatewayExceptionHandler extends DefaultErrorWebExceptionHandler {
 
     private Map<String, Object> buildStatusResponse(HttpStatus status) {
         if (status.is4xxClientError()) {
-            return response(RestRSP.systemFailed("资源无权访问"));
+            return response(RestRSP.failed("资源无权访问"));
         } else {
-            return response(RestRSP.systemFailed("系统异常"));
+            return response(RestRSP.failed("系统异常"));
         }
     }
 
@@ -53,11 +53,11 @@ public class GatewayExceptionHandler extends DefaultErrorWebExceptionHandler {
         if (error instanceof ResponseStatusException) {
             response = buildStatusResponse(((ResponseStatusException) error).getStatus());
         } else if (error instanceof org.springframework.cloud.gateway.support.TimeoutException) {
-            response = response(RestRSP.systemFailed("系统异常"));
+            response = response(RestRSP.failed("系统异常"));
         } else if (error instanceof java.net.ConnectException) {
-            response = response(RestRSP.systemFailed("系统异常"));
+            response = response(RestRSP.failed("系统异常"));
         } else {
-            response = response(RestRSP.systemFailed("系统异常"));
+            response = response(RestRSP.failed("系统异常"));
         }
         return response;
     }

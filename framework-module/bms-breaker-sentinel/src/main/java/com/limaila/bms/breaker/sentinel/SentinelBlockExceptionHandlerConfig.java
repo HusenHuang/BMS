@@ -37,21 +37,21 @@ public class SentinelBlockExceptionHandlerConfig {
         RestRSP rsp;
         if (ex instanceof FlowException) {
             // 限流异常
-            rsp = RestRSP.systemFailed("FLOW");
+            rsp = RestRSP.failed("FLOW");
         } else if (ex instanceof DegradeException) {
             // 降级异常
-            rsp = RestRSP.systemFailed("DEGRADE");
+            rsp = RestRSP.failed("DEGRADE");
         } else if (ex instanceof ParamFlowException) {
             // 热点参数异常
-            rsp = RestRSP.systemFailed("PARAM_FLOW");
+            rsp = RestRSP.failed("PARAM_FLOW");
         } else if (ex instanceof SystemBlockException) {
             // 系统异常
-            rsp = RestRSP.systemFailed("SYSTEM_BLOCK");
+            rsp = RestRSP.failed("SYSTEM_BLOCK");
         } else if (ex instanceof AuthorityException) {
             // 授权异常
-            rsp = RestRSP.systemFailed("AUTHORITY_BLOCK");
+            rsp = RestRSP.failed("AUTHORITY_BLOCK");
         } else {
-            rsp = RestRSP.systemFailed("FAILED");
+            rsp = RestRSP.failed("FAILED");
         }
         return rsp;
     }

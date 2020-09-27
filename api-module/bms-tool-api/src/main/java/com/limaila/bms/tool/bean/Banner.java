@@ -1,6 +1,6 @@
 package com.limaila.bms.tool.bean;
 
-import com.limaila.bms.common.bean.BaseDateTime;
+import com.limaila.bms.common.bean.BaseObject;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -16,7 +16,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @Getter
 @Setter
-public class Banner extends BaseDateTime {
+public class Banner extends BaseObject {
 
     private Long id;
 
