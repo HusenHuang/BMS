@@ -59,7 +59,7 @@ public class RestRSP<T> implements Serializable {
      * @param data 响应数据
      * @return 响应体
      */
-    public static <T> RestRSP success(T data) {
+    public static <T> RestRSP<T> success(T data) {
         return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), null, data);
     }
 
@@ -92,9 +92,8 @@ public class RestRSP<T> implements Serializable {
      * @param data   响应数据
      * @return
      */
-    private static <T> RestRSP of(int code, String msg, String remark, T data) {
-        return RestRSP.builder()
-                .code(code)
+    private static <T> RestRSP<T> of(int code, String msg, String remark, T data) {
+        return RestRSP.<T>builder().code(code)
                 .msg(msg)
                 .remark(remark)
                 .data(data)

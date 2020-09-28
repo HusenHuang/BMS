@@ -1,6 +1,7 @@
 package com.limaila.bms.tool.api.impl;
 
 import com.limaila.bms.common.response.RestRSP;
+import com.limaila.bms.tool.api.IBannerApi;
 import com.limaila.bms.tool.api.IBannerMapping;
 import com.limaila.bms.tool.bean.Banner;
 import org.springframework.web.bind.annotation.RestController;
