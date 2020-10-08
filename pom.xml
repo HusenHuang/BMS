@@ -21,17 +21,19 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 
-<!--        <spring-boot.version>2.3.0.RELEASE</spring-boot.version>-->
-<!--        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>-->
+        <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
+        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
+        <spring-cloud-alibaba.version>2.2.3.RELEASE</spring-cloud-alibaba.version>
 
         <!-- 由于SpringCloudAlibaba不支持SpringBoot-2.3x 这里使用SpringBoot2.2.x系列-->
-        <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
-        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>
-
-        <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>
+<!--        <spring-boot.version>2.2.5.RELEASE</spring-boot.version>-->
+<!--        <spring-cloud.version>Hoxton.SR4</spring-cloud.version>-->
+<!--        <spring-cloud-alibaba.version>2.2.1.RELEASE</spring-cloud-alibaba.version>-->
         <springcloud.kubernetes.version>1.1.5.RELEASE</springcloud.kubernetes.version>
         <fastjson.version>1.2.62</fastjson.version>
         <apollo.version>1.7.0</apollo.version>
+        <redisson-spring-boot-starter.version>3.13.4</redisson-spring-boot-starter.version>
+        <xstream.version>1.4.13</xstream.version>
         <revision>1.0.1</revision>
     </properties>
 

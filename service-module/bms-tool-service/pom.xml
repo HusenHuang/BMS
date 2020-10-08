@@ -27,6 +27,12 @@
 
         <dependency>
             <groupId>com.limaila</groupId>
+            <artifactId>bms-cache</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.limaila</groupId>
             <artifactId>bms-discovery-kubernetes</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

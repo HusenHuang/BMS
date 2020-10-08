@@ -19,6 +19,9 @@
         <module>bms-breaker-sentinel</module>
         <module>bms-feign</module>
         <module>bms-jwt</module>
+        <module>bms-cache</module>
+        <module>bms-json</module>
+        <module>bms-xml</module>
     </modules>
 
 
