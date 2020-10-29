@@ -21,7 +21,7 @@ public class WebExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
-    public RestRSP defaultErrorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) throws Exception {
+    public RestRSP defaultErrorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
         log.error("WebExceptionHandler ", e);
         return RestRSP.failed("系统异常");
     }
