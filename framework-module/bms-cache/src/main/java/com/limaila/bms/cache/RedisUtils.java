@@ -20,6 +20,10 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisUtils {
 
+    private RedisUtils() {
+
+    }
+
     private static StringRedisTemplate TEMPLATE;
 
     private static ValueOperations<String, String> VOS;

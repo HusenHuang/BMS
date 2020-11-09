@@ -37,29 +37,6 @@ public class BannerApi implements IBannerMapping {
                 .url("http://www.baidu.com")
                 .build());
 //        log.info("setCache : " + RedisUtils.setForString("key", "getBannerList"));
-
-        new Thread(() -> LockUtils.runWithLock("lock1", () -> {
-            log.info("A runWithLock执行开始 !");
-            try {
-                TimeUnit.SECONDS.sleep(30);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            log.info("A runWithLock执行结束 !");
-            return true;
-        })).start();
-
-
-        new Thread(() -> LockUtils.runWithLock("lock1", () -> {
-            log.info("B runWithLock执行开始 !");
-            try {
-                TimeUnit.SECONDS.sleep(30);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            log.info("B runWithLock执行结束 !");
-            return true;
-        })).start();
         return RestRSP.success(bannerList);
     }
 }

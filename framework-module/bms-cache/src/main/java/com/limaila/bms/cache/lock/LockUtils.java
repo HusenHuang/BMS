@@ -1,7 +1,6 @@
 package com.limaila.bms.cache.lock;
 
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RFuture;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,34 +34,12 @@ public class LockUtils {
      *
      * @param key      锁Key
      * @param callback 回调执行函数
+     * @param fair     是否公平锁
      * @param <T>      泛型
      * @return
      */
-    public static <T> T runWithLock(String key, LockCallback<T> callback) {
-        RLock lock = redissonClient.getLock(key);
-        lock.lock();
-        try {
-            return callback.callback();
-        } finally {
-            lock.unlock();
-        }
-    }
-
-
-    /**
-     * 公平锁
-     * 基于Redis的Redisson分布式可重入公平锁也是实现了java.util.concurrent.locks.Lock接口的一种RLock对象。
-     *  同时还提供了异步（Async）、反射式（Reactive）和RxJava2标准的接口。它保证了当多个Redisson客户端线程同时请求加锁时，优先分配给先发出请求的线程。
-     *  所有请求线程会在一个队列中排队,当某个线程出现宕机时，Redisson会等待5秒后继续下一个线程，也就是说如果前面有5个线程都处于等待状态，那么后面的线程会等待至少25秒。
-     * 分布式锁执行逻辑
-     * 如果获取不到锁会一直等待
-     * @param key
-     * @param callback
-     * @param <T>
-     * @return
-     */
-    public static <T> T runWithFairLock(String key, LockCallback<T> callback) {
-        RLock lock = redissonClient.getFairLock(key);
+    public static <T> T toRun(String key, LockCallback<T> callback, boolean fair) {
+        RLock lock = fair ? redissonClient.getFairLock(key) : redissonClient.getLock(key);
         lock.lock();
         try {
             return callback.callback();
@@ -80,7 +57,7 @@ public class LockUtils {
      * @param <T>      泛型
      * @return
      */
-    public static <T> T runWithTryLock(String key, long waitTimeMillis, LockCallback<T> callback) throws LockException {
+    public static <T> T tryRun(String key, long waitTimeMillis, LockCallback<T> callback) throws LockException {
         boolean res = false;
         RLock lock = redissonClient.getLock(key);
         try {
