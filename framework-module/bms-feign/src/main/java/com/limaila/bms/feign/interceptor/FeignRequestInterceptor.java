@@ -19,7 +19,7 @@ import java.net.URLEncoder;
  ***/
 @Component
 @Slf4j
-public class ConsumerRequestInterceptor implements RequestInterceptor {
+public class FeignRequestInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
