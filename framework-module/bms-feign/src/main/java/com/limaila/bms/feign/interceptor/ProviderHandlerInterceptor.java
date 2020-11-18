@@ -37,6 +37,7 @@ public class ProviderHandlerInterceptor implements HandlerInterceptor {
         } else {
             RequestContextHolder.setContext(RequestContext.newInstance());
         }
+        log.info("rc ---- provider = " + context);
         return true;
     }
 }

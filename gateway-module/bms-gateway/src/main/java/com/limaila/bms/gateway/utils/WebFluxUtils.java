@@ -1,7 +1,7 @@
 package com.limaila.bms.gateway.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.limaila.bms.common.response.RestRSP;
+import com.limaila.bms.common.response.RestResponse;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
  ***/
 public class WebFluxUtils {
 
-    public static Mono<Void> writeToMono(ServerHttpResponse response, RestRSP data) {
+    public static Mono<Void> writeToMono(ServerHttpResponse response, RestResponse data) {
         response.setStatusCode(HttpStatus.OK);
         response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
         DataBuffer dataBuffer = response.bufferFactory().wrap(JSON.toJSONString(data).getBytes());

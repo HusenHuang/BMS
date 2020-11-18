@@ -1,6 +1,6 @@
 package com.limaila.bms.tool.api;
 
-import com.limaila.bms.common.response.RestRSP;
+import com.limaila.bms.common.response.RestResponse;
 import com.limaila.bms.tool.bean.Banner;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,5 +22,5 @@ public interface IBannerMapping {
      * @return
      */
     @GetMapping("/getBannerList")
-    RestRSP<List<Banner>> getBannerList();
+    RestResponse<List<Banner>> getBannerList();
 }

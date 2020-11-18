@@ -2,7 +2,7 @@ package com.limaila.bms.authority.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.google.common.collect.Maps;
-import com.limaila.bms.common.response.RestRSP;
+import com.limaila.bms.common.response.RestResponse;
 import com.limaila.bms.common.utils.BmsEnvCommon;
 import com.limaila.bms.common.utils.BmsSentinelRouteCommon;
 import com.limaila.bms.tool.api.IBannerApi;
@@ -35,9 +35,9 @@ public class HelloWorldController {
 
     @SentinelResource(value = BmsSentinelRouteCommon.BMS_AUTHORITY_HELLO_WORLD_INDEX)
     @RequestMapping
-    public RestRSP index() {
+    public RestResponse index() {
         List<String> services = discoveryClient.getServices();
-        RestRSP<List<Banner>> rsp = bannerClient.getBannerList();
+        RestResponse<List<Banner>> rsp = bannerClient.getBannerList();
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("h1", h1);
         map.put("services", services);
@@ -45,7 +45,7 @@ public class HelloWorldController {
         map.put("nodeName", BmsEnvCommon.getNodeName());
         map.put("podIp", BmsEnvCommon.getPodIp());
         map.put("serverEnv", BmsEnvCommon.getServerEnv());
-        return RestRSP.success(map);
+        return RestResponse.success(map);
     }
 
 }

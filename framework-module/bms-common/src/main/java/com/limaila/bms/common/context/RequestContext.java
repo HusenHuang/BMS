@@ -49,6 +49,11 @@ public class RequestContext implements Serializable {
      */
     private String os;
 
+    /**
+     * 请求的uri
+     */
+    private String requestUri;
+
     private RequestContext() {
 
     }
@@ -56,6 +61,11 @@ public class RequestContext implements Serializable {
     public static RequestContext newInstance() {
         RequestContext rc = new RequestContext();
         rc.setRequestId(UUID.randomUUID().toString());
+        RequestContextHolder.setContext(rc);
+        return rc;
+    }
+
+    public static RequestContext newInstance(RequestContext rc) {
         RequestContextHolder.setContext(rc);
         return rc;
     }

@@ -2,7 +2,7 @@ package com.limaila.bms.gateway.config;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.limaila.bms.common.response.RestRSP;
+import com.limaila.bms.common.response.RestResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
@@ -28,7 +28,7 @@ public class GatewayExceptionHandler extends DefaultErrorWebExceptionHandler {
     }
 
 
-    private static Map<String, Object> response(RestRSP rsp) {
+    private static Map<String, Object> response(RestResponse rsp) {
         return JSON.parseObject(JSON.toJSONString(rsp), new TypeReference<LinkedHashMap<String, Object>>() {
         });
     }
@@ -36,9 +36,9 @@ public class GatewayExceptionHandler extends DefaultErrorWebExceptionHandler {
 
     private Map<String, Object> buildStatusResponse(HttpStatus status) {
         if (status.is4xxClientError()) {
-            return response(RestRSP.failed("资源无权访问"));
+            return response(RestResponse.failed("资源无权访问"));
         } else {
-            return response(RestRSP.failed("系统异常"));
+            return response(RestResponse.failed("系统异常"));
         }
     }
 
@@ -53,11 +53,11 @@ public class GatewayExceptionHandler extends DefaultErrorWebExceptionHandler {
         if (error instanceof ResponseStatusException) {
             response = buildStatusResponse(((ResponseStatusException) error).getStatus());
         } else if (error instanceof org.springframework.cloud.gateway.support.TimeoutException) {
-            response = response(RestRSP.failed("系统异常"));
+            response = response(RestResponse.failed("系统异常"));
         } else if (error instanceof java.net.ConnectException) {
-            response = response(RestRSP.failed("系统异常"));
+            response = response(RestResponse.failed("系统异常"));
         } else {
-            response = response(RestRSP.failed("系统异常"));
+            response = response(RestResponse.failed("系统异常"));
         }
         return response;
     }

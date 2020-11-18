@@ -1,6 +1,6 @@
 package com.limaila.bms.web.handler;
 
-import com.limaila.bms.common.response.RestRSP;
+import com.limaila.bms.common.response.RestResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,8 +21,8 @@ public class WebExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
-    public RestRSP defaultErrorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
+    public RestResponse defaultErrorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
         log.error("WebExceptionHandler ", e);
-        return RestRSP.failed("系统异常");
+        return RestResponse.failed("系统异常");
     }
 }

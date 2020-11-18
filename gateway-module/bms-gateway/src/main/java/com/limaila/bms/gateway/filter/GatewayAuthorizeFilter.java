@@ -1,9 +1,10 @@
 package com.limaila.bms.gateway.filter;
 
+import com.alibaba.fastjson.JSON;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.limaila.bms.common.constants.HeaderConstant;
 import com.limaila.bms.common.context.RequestContext;
-import com.limaila.bms.common.response.RestRSP;
+import com.limaila.bms.common.response.RestResponse;
 import com.limaila.bms.gateway.utils.WebFluxUtils;
 import com.limaila.bms.jwt.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,8 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 /***
@@ -56,16 +59,25 @@ public class GatewayAuthorizeFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         RequestContext rc = RequestContext.newInstance();
+        log.info("rc ---- gateway = " + JSON.toJSONString(rc));
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
         String uri = request.getURI().getPath();
-
+        // 无论是登陆或者不登陆都必须带上下文
+        ServerHttpRequest.Builder mutate = request.mutate();
+        try {
+            mutate.header(HeaderConstant.HEADER_CONTEXT,  URLEncoder.encode(JSON.toJSONString(rc), "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            log.error("[AuthorizeFilter] 无法解析 RequestContext = '" + rc + "'", e);
+            return WebFluxUtils.writeToMono(response, RestResponse.failed("解析异常"));
+        }
         //  检查是否不需要登录
         if (!CollectionUtils.isEmpty(noAuthUris)) {
             for (String noAuthUri : noAuthUris) {
                 if (antPathMatcher.match(noAuthUri, uri)) {
                     // 符合不需要登录 直接放行
-                    return chain.filter(exchange);
+                    ServerWebExchange mutableExchange = exchange.mutate().request(mutate.build()).build();
+                    return chain.filter(mutableExchange);
                 }
             }
         }
@@ -73,11 +85,9 @@ public class GatewayAuthorizeFilter implements GlobalFilter, Ordered {
         // 获取登录标识
         String authorization = request.getHeaders().getFirst(HeaderConstant.HEADER_AUTHORIZATION);
         if (StringUtils.isBlank(authorization)) {
-            return WebFluxUtils.writeToMono(response, RestRSP.failed("非法请求"));
+            return WebFluxUtils.writeToMono(response, RestResponse.failed("非法请求"));
         }
-
         // 解析登录标识
-        ServerHttpRequest.Builder mutate = request.mutate();
         try {
             DecodedJWT decodedJWT = JWTUtil.resolveToken(authorization, secretKey);
             String userKey = JWTUtil.getClaimAsString(decodedJWT);
@@ -86,7 +96,7 @@ public class GatewayAuthorizeFilter implements GlobalFilter, Ordered {
             mutate.header(HeaderConstant.HEADER_USER_KEY, userKey);
         } catch (Exception e) {
             log.error("[AuthorizeFilter] 无法解析 authorization = '" + authorization + "'", e);
-            return WebFluxUtils.writeToMono(response, RestRSP.failed("解析异常"));
+            return WebFluxUtils.writeToMono(response, RestResponse.failed("解析异常"));
         }
 
         ServerWebExchange mutableExchange = exchange.mutate().request(mutate.build()).build();

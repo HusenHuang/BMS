@@ -32,5 +32,6 @@ public class ConsumerRequestInterceptor implements RequestInterceptor {
                 log.error("ConsumerRequestInterceptor fail", e);
             }
         }
+        log.info("rc ---- consumer = " + JSON.toJSONString(context));
     }
 }

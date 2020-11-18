@@ -18,7 +18,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class RestRSP<T> implements Serializable {
+public class RestResponse<T> implements Serializable {
 
 
     /**
@@ -59,7 +59,7 @@ public class RestRSP<T> implements Serializable {
      * @param data 响应数据
      * @return 响应体
      */
-    public static <T> RestRSP<T> success(T data) {
+    public static <T> RestResponse<T> success(T data) {
         return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), null, data);
     }
 
@@ -68,7 +68,7 @@ public class RestRSP<T> implements Serializable {
      *
      * @return 响应体
      */
-    public static RestRSP success() {
+    public static RestResponse success() {
         return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), null, null);
     }
 
@@ -79,7 +79,7 @@ public class RestRSP<T> implements Serializable {
      * @param remark 备注
      * @return
      */
-    public static RestRSP failed(String remark) {
+    public static RestResponse failed(String remark) {
         return of(RestCode.FAILED.getCode(), RestCode.FAILED.getMsg(), remark, null);
     }
 
@@ -92,8 +92,8 @@ public class RestRSP<T> implements Serializable {
      * @param data   响应数据
      * @return
      */
-    private static <T> RestRSP<T> of(int code, String msg, String remark, T data) {
-        return RestRSP.<T>builder().code(code)
+    private static <T> RestResponse<T> of(int code, String msg, String remark, T data) {
+        return RestResponse.<T>builder().code(code)
                 .msg(msg)
                 .remark(remark)
                 .data(data)
@@ -111,7 +111,7 @@ public class RestRSP<T> implements Serializable {
      * @param remark 错误备注
      * @return
      */
-    private static RestRSP of(int code, String msg, String remark) {
+    private static RestResponse of(int code, String msg, String remark) {
         return of(code, msg, remark, null);
     }
 

@@ -1,10 +1,6 @@
 package com.limaila.bms.tool.api.impl;
 
-import com.limaila.bms.cache.RedisUtils;
-import com.limaila.bms.cache.lock.LockUtils;
-import com.limaila.bms.common.response.RestRSP;
-import com.limaila.bms.json.JSONUtils;
-import com.limaila.bms.tool.api.IBannerApi;
+import com.limaila.bms.common.response.RestResponse;
 import com.limaila.bms.tool.api.IBannerMapping;
 import com.limaila.bms.tool.bean.Banner;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 /***
  说明: 
@@ -28,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class BannerApi implements IBannerMapping {
 
     @Override
-    public RestRSP<List<Banner>> getBannerList() {
+    public RestResponse<List<Banner>> getBannerList() {
         List<Banner> bannerList = new ArrayList<>();
         bannerList.add(Banner.builder()
                 .id((long) new Random().nextInt(100))
@@ -36,7 +31,6 @@ public class BannerApi implements IBannerMapping {
                 .name(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .url("http://www.baidu.com")
                 .build());
-//        log.info("setCache : " + RedisUtils.setForString("key", "getBannerList"));
-        return RestRSP.success(bannerList);
+        return RestResponse.success(bannerList);
     }
 }
