@@ -16,7 +16,7 @@ import java.net.URLDecoder;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
-public class RequestContextResolvingInterceptor implements HandlerInterceptor {
+public class WebRequestContextResolvingInterceptor implements HandlerInterceptor {
 
     private final ConcurrentHashMap<HandlerMethod, Boolean> cache = new ConcurrentHashMap<>();
 
