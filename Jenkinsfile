@@ -18,4 +18,11 @@ pipeline {
            sh "mvn clean package -Dmaven.test.skip=true"
         }
     }
+
+
+    stage('完成阶段') {
+        steps {
+           sh "echo OK"
+        }
+    }
 }
