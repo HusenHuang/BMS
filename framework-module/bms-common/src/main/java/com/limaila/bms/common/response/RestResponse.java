@@ -56,20 +56,20 @@ public class RestResponse<T> implements Serializable {
     /**
      * 响应成功
      *
-     * @param data 响应数据
      * @return 响应体
      */
-    public static <T> RestResponse<T> success(T data) {
-        return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), null, data);
+    public static RestResponse<?> success() {
+        return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), null, null);
     }
 
     /**
      * 响应成功
      *
+     * @param data 响应数据
      * @return 响应体
      */
-    public static RestResponse success() {
-        return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), null, null);
+    public static <T> RestResponse<T> success(T data) {
+        return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), null, data);
     }
 
 
@@ -79,8 +79,21 @@ public class RestResponse<T> implements Serializable {
      * @param remark 备注
      * @return
      */
-    public static RestResponse failed(String remark) {
+    public static RestResponse<?> failed(String remark) {
         return of(RestCode.FAILED.getCode(), RestCode.FAILED.getMsg(), remark, null);
+    }
+
+
+    /**
+     * 响应
+     *
+     * @param code   错误码
+     * @param msg    错误信息
+     * @param remark 错误备注
+     * @return
+     */
+    private static RestResponse<?> of(int code, String msg, String remark) {
+        return of(code, msg, remark, null);
     }
 
     /**
@@ -100,19 +113,6 @@ public class RestResponse<T> implements Serializable {
                 .serverTime(System.currentTimeMillis())
                 .requestId(RequestContextHolder.getContext().getRequestId())
                 .build();
-    }
-
-
-    /**
-     * 响应
-     *
-     * @param code   错误码
-     * @param msg    错误信息
-     * @param remark 错误备注
-     * @return
-     */
-    private static RestResponse of(int code, String msg, String remark) {
-        return of(code, msg, remark, null);
     }
 
 }

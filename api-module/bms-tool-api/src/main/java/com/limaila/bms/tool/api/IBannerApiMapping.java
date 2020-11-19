@@ -14,7 +14,7 @@ import java.util.List;
  @desc
  ***/
 @RequestMapping("/api/banner")
-public interface IBannerMapping {
+public interface IBannerApiMapping {
 
     /**
      * 获取Banner列表

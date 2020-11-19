@@ -37,6 +37,12 @@
             <version>${project.parent.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.limaila</groupId>
+            <artifactId>bms-breaker-sentinel</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
 
         <!-- BMS-API -->
         <dependency>

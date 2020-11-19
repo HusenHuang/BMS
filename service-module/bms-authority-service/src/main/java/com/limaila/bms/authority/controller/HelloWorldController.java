@@ -35,7 +35,7 @@ public class HelloWorldController {
 
     @SentinelResource(value = BmsSentinelRouteCommon.BMS_AUTHORITY_HELLO_WORLD_INDEX)
     @RequestMapping
-    public RestResponse index() {
+    public RestResponse<?> index() {
         List<String> services = discoveryClient.getServices();
         RestResponse<List<Banner>> rsp = bannerClient.getBannerList();
         Map<String, Object> map = Maps.newLinkedHashMap();

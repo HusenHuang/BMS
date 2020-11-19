@@ -1,7 +1,7 @@
 package com.limaila.bms.tool.api.impl;
 
 import com.limaila.bms.common.response.RestResponse;
-import com.limaila.bms.tool.api.IBannerMapping;
+import com.limaila.bms.tool.api.IBannerApiMapping;
 import com.limaila.bms.tool.bean.Banner;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +20,7 @@ import java.util.Random;
  ***/
 @RestController
 @Slf4j
-public class BannerApi implements IBannerMapping {
+public class BannerApi implements IBannerApiMapping {
 
     @Override
     public RestResponse<List<Banner>> getBannerList() {

@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  Spring Cloud Feign 整合 sentinel写法
  ***/
 @FeignClient(name = BmsProjectCommon.BMS_TOOL_SERVICE)
-public interface IBannerApi extends IBannerMapping {
+public interface IBannerApi extends IBannerApiMapping {
 
 
 }
