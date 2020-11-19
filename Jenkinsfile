@@ -23,6 +23,13 @@ pipeline {
             }
         }
 
+        stage('生成镜像') {
+            steps {
+                sh "docker images";
+                sh "pwd"
+            }
+        }
+
 
         stage('完成阶段') {
             steps {
