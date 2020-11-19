@@ -7,6 +7,10 @@ node("master") {
 
 
 pipeline {
+
+     agent {
+     }
+
      stages {
          stage('Git阶段') {
             steps {
