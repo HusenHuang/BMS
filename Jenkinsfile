@@ -19,7 +19,7 @@ pipeline {
 
         stage('Maven阶段') {
             steps {
-               sh "mvn -T4 –C clean package -Dmaven.test.skip=true"
+               sh "mvn -T4 clean package -Dmaven.test.skip=true"
             }
         }
 
