@@ -1,3 +1,4 @@
+#!groovy
 node("master") {
 //     checkout scm
 //     加载 groovy 脚本
@@ -5,11 +6,12 @@ node("master") {
 //     helmUtils = load 'groovy/HelmUtils.groovy'
 }
 
+def buildProject = ${project}
 
 pipeline {
 
      agent any
-     buildProject = ${project}
+
 
      stages {
 //          stage('Git阶段') {
