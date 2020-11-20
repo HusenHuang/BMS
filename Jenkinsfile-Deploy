@@ -1,0 +1,20 @@
+node("master") {
+}
+
+pipeline {
+     agent any
+
+     stages {
+         stage('部署阶段') {
+            steps {
+               sh 'kubectl get pod -A'
+            }
+        }
+
+        stage('完成阶段') {
+            steps {
+               sh "echo ${projectName} OK"
+            }
+        }
+     }
+}

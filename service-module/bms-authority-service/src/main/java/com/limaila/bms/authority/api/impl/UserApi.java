@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * 用户API
  */
@@ -20,6 +22,11 @@ public class UserApi implements IUserApiMapping {
 
     @Override
     public User getUserById(@RequestParam("userId") Long userId) {
+        try {
+            TimeUnit.SECONDS.sleep(4);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return ROOT;
     }
 }
