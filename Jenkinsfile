@@ -25,6 +25,7 @@ pipeline {
 
         stage('生成镜像') {
             steps {
+                sh "who"
                 sh "docker images";
                 sh "pwd"
             }
