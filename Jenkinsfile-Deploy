@@ -7,7 +7,7 @@ pipeline {
      stages {
          stage('部署阶段') {
             steps {
-               sh 'kubectl get pod -A'
+               sh '/usr/local/bin/kubectl get pod -A'
             }
         }
 
