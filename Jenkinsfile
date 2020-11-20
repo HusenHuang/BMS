@@ -1,12 +1,5 @@
-#!groovy
 node("master") {
-//     checkout scm
-//     加载 groovy 脚本
-//     resolutionApplicationUtils = load 'groovy/ResolutionApplicationUtils.groovy'
-//     helmUtils = load 'groovy/HelmUtils.groovy'
 }
-
-def buildProject = ${project}
 
 pipeline {
 
@@ -33,7 +26,7 @@ pipeline {
 //         }
         stage('完成阶段') {
             steps {
-               sh "echo OK"
+               sh "echo ${project} OK"
             }
         }
      }
