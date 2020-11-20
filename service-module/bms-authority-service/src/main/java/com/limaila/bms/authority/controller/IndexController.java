@@ -22,10 +22,8 @@ import java.util.Map;
  @desc
  ***/
 @RestController
-@RequestMapping("/helloworld")
-public class HelloWorldController {
-
-    private String h1;
+@RequestMapping("/index")
+public class IndexController {
 
     @Autowired
     private DiscoveryClient discoveryClient;
@@ -33,13 +31,12 @@ public class HelloWorldController {
     @Autowired
     private IBannerApi bannerClient;
 
-    @SentinelResource(value = BmsSentinelRouteCommon.BMS_AUTHORITY_HELLO_WORLD_INDEX)
+    @SentinelResource(value = BmsSentinelRouteCommon.BMS_AUTHORITY_INDEX_INDEX)
     @RequestMapping
     public RestResponse<?> index() {
         List<String> services = discoveryClient.getServices();
         RestResponse<List<Banner>> rsp = bannerClient.getBannerList();
         Map<String, Object> map = Maps.newLinkedHashMap();
-        map.put("h1", h1);
         map.put("services", services);
         map.put("rsp", rsp);
         map.put("nodeName", BmsEnvCommon.getNodeName());

@@ -10,5 +10,7 @@ import static com.limaila.bms.common.utils.BmsProjectCommon.*;
  ***/
 public interface BmsSentinelRouteCommon {
 
-    String BMS_AUTHORITY_HELLO_WORLD_INDEX = BMS_AUTHORITY_SERVICE + ".HelloWorldController.index";
+    String BMS_AUTHORITY_INDEX_INDEX = BMS_AUTHORITY_SERVICE + ".IndexController.index";
+
+    String BMS_TOOL_INDEX_INDEX = BMS_TOOL_SERVICE + ".IndexController.index";
 }
