@@ -19,7 +19,7 @@ pipeline {
 
         stage('生成镜像') {
             steps {
-                sh "docker build -f service-module/${projectName}/docker/Dockerfile -t ${projectName}:${projectVersion} .";
+                sh "cd service-module/${projectName}; docker build -f docker/Dockerfile -t ${projectName}:${projectVersion} .";
             }
         }
         stage('完成阶段') {
