@@ -9,6 +9,7 @@ node("master") {
 pipeline {
 
      agent any
+     buildProject = ${project}
 
      stages {
 //          stage('Git阶段') {
@@ -22,16 +23,12 @@ pipeline {
 //                sh "mvn -T4 clean package -Dmaven.test.skip=true"
 //             }
 //         }
-
-        stage('生成镜像') {
-            steps {
-                sh "who"
-                sh "docker images";
-                sh "pwd"
-            }
-        }
-
-
+//
+//         stage('生成镜像') {
+//             steps {
+//                 sh "docker build -f docker/Dockerfile -t bms-tool-service:1.0 .";
+//             }
+//         }
         stage('完成阶段') {
             steps {
                sh "echo OK"
