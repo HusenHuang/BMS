@@ -7,13 +7,13 @@ pipeline {
      stages {
          stage('部署阶段') {
             steps {
-               sh '/usr/local/bin/kubectl get pod -A'
+               sh '/usr/local/bin/kubectl -n bms set image deployment ${projectName} ${projectName}=${projectName}:${projectVersion} --record'
             }
         }
 
         stage('完成阶段') {
             steps {
-               sh "echo ${projectName} OK"
+               sh "echo ${projectName} OK ${projectVersion}"
             }
         }
      }
