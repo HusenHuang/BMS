@@ -23,7 +23,7 @@ public class UserApi implements IUserApiMapping {
     @Override
     public User getUserById(@RequestParam("userId") Long userId) {
         try {
-            TimeUnit.SECONDS.sleep(4);
+            TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
