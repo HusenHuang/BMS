@@ -1,9 +1,9 @@
 package com.limaila.bms.gateway.filter;
 
-import com.alibaba.fastjson.JSON;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.limaila.bms.common.constants.HeaderConstant;
 import com.limaila.bms.common.context.RequestContext;
+import com.limaila.bms.common.context.RequestContextHolder;
 import com.limaila.bms.common.response.RestResponse;
 import com.limaila.bms.gateway.utils.WebFluxUtils;
 import com.limaila.bms.jwt.JWTUtil;
@@ -21,8 +21,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 
 /***
@@ -58,19 +56,14 @@ public class GatewayAuthorizeFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        RequestContext rc = RequestContext.newInstance();
-        log.info("rc ---- gateway = " + JSON.toJSONString(rc));
+        RequestContext webContext = WebFluxUtils.getWebContext(exchange);
+        RequestContextHolder.setContext(webContext);
+        log.info("GatewayAuthorizeFilter ---- filter = " + webContext + " ..............");
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
         String uri = request.getURI().getPath();
         // 无论是登陆或者不登陆都必须带上下文
         ServerHttpRequest.Builder mutate = request.mutate();
-        try {
-            mutate.header(HeaderConstant.HEADER_CONTEXT,  URLEncoder.encode(JSON.toJSONString(rc), "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            log.error("[AuthorizeFilter] 无法解析 RequestContext = '" + rc + "'", e);
-            return WebFluxUtils.writeToMono(response, RestResponse.failed("解析异常"));
-        }
         //  检查是否不需要登录
         if (!CollectionUtils.isEmpty(noAuthUris)) {
             for (String noAuthUri : noAuthUris) {
@@ -91,7 +84,7 @@ public class GatewayAuthorizeFilter implements GlobalFilter, Ordered {
         try {
             DecodedJWT decodedJWT = JWTUtil.resolveToken(authorization, secretKey);
             String userKey = JWTUtil.getClaimAsString(decodedJWT);
-            rc.setUserKey(userKey);
+            RequestContextHolder.getContext().setUserKey(userKey);
             // 设置到请求头中
             mutate.header(HeaderConstant.HEADER_USER_KEY, userKey);
         } catch (Exception e) {
@@ -105,6 +98,6 @@ public class GatewayAuthorizeFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return Ordered.HIGHEST_PRECEDENCE;
+        return Ordered.HIGHEST_PRECEDENCE + 1;
     }
 }

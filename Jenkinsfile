@@ -5,7 +5,7 @@ pipeline {
      agent any
 
      stages {
-         stage('Git阶段') {
+        stage('Git阶段') {
             steps {
                git 'https://github.com/HusenHuang/BMS.git'
             }

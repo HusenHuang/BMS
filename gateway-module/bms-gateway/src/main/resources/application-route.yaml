@@ -2,7 +2,10 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: helloworld
+        - id: index
           predicates:
-            - Path=/helloworld
+            - Path=/index
           uri: lb://bms-authority-service
+      default-filters:
+        - RequestBody
+        - ResponseBody
