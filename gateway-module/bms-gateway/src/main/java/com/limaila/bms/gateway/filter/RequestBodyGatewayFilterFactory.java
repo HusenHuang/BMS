@@ -11,6 +11,7 @@ import org.springframework.cloud.gateway.filter.factory.rewrite.CachedBodyOutput
 import org.springframework.cloud.gateway.support.BodyInserterContext;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.codec.HttpMessageReader;
 import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -66,6 +67,11 @@ public class RequestBodyGatewayFilterFactory extends
                 RequestContextHolder.setContext(webContext);
                 log.info("RequestBodyGatewayFilterFactory ---- filter = " + webContext + "................");
 
+                // 过滤GET请求
+                if (exchange.getRequest().getMethod() == HttpMethod.GET) {
+                    return chain.filter(exchange);
+                }
+
                 Class inClass = String.class;
                 Class outClass = String.class;
                 String originalResponseContentType = exchange
@@ -79,7 +85,9 @@ public class RequestBodyGatewayFilterFactory extends
                             log.info("BMS REQUEST = {}", String.valueOf(originalBody));
                             return Mono.just(originalBody);
                         })
-                        .switchIfEmpty(Mono.defer(() -> Mono.just(null)));
+                        .switchIfEmpty(Mono.defer(() ->
+                                Mono.just(null)
+                        ));
                 BodyInserter bodyInserter = BodyInserters.fromPublisher(modifiedBody,
                         outClass);
                 HttpHeaders headers = new HttpHeaders();
