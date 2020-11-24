@@ -56,44 +56,50 @@ public class GatewayAuthorizeFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        RequestContext webContext = WebFluxUtils.getWebContext(exchange);
-        RequestContextHolder.setContext(webContext);
-        log.info("GatewayAuthorizeFilter ---- filter = " + webContext + " ..............");
-        ServerHttpRequest request = exchange.getRequest();
-        ServerHttpResponse response = exchange.getResponse();
-        String uri = request.getURI().getPath();
-        // 无论是登陆或者不登陆都必须带上下文
-        ServerHttpRequest.Builder mutate = request.mutate();
-        //  检查是否不需要登录
-        if (!CollectionUtils.isEmpty(noAuthUris)) {
-            for (String noAuthUri : noAuthUris) {
-                if (antPathMatcher.match(noAuthUri, uri)) {
-                    // 符合不需要登录 直接放行
-                    ServerWebExchange mutableExchange = exchange.mutate().request(mutate.build()).build();
-                    return chain.filter(mutableExchange);
+
+        try {
+            RequestContext webContext = WebFluxUtils.getWebContext(exchange);
+            RequestContextHolder.setContext(webContext);
+            log.info("GatewayAuthorizeFilter ---- filter = " + webContext + " ..............");
+            ServerHttpRequest request = exchange.getRequest();
+            ServerHttpResponse response = exchange.getResponse();
+            String uri = request.getURI().getPath();
+            // 无论是登陆或者不登陆都必须带上下文
+            ServerHttpRequest.Builder mutate = request.mutate();
+            //  检查是否不需要登录
+            if (!CollectionUtils.isEmpty(noAuthUris)) {
+                for (String noAuthUri : noAuthUris) {
+                    if (antPathMatcher.match(noAuthUri, uri)) {
+                        // 符合不需要登录 直接放行
+                        ServerWebExchange mutableExchange = exchange.mutate().request(mutate.build()).build();
+                        return chain.filter(mutableExchange);
+                    }
                 }
             }
-        }
 
-        // 获取登录标识
-        String authorization = request.getHeaders().getFirst(HeaderConstant.HEADER_AUTHORIZATION);
-        if (StringUtils.isBlank(authorization)) {
-            return WebFluxUtils.writeToMono(response, RestResponse.failed("非法请求"));
-        }
-        // 解析登录标识
-        try {
-            DecodedJWT decodedJWT = JWTUtil.resolveToken(authorization, secretKey);
-            String userKey = JWTUtil.getClaimAsString(decodedJWT);
-            RequestContextHolder.getContext().setUserKey(userKey);
-            // 设置到请求头中
-            mutate.header(HeaderConstant.HEADER_USER_KEY, userKey);
+            // 获取登录标识
+            String authorization = request.getHeaders().getFirst(HeaderConstant.HEADER_AUTHORIZATION);
+            if (StringUtils.isBlank(authorization)) {
+                return WebFluxUtils.writeToMono(response, RestResponse.failed("非法请求"));
+            }
+            // 解析登录标识
+            try {
+                DecodedJWT decodedJWT = JWTUtil.resolveToken(authorization, secretKey);
+                String userKey = JWTUtil.getClaimAsString(decodedJWT);
+                RequestContextHolder.getContext().setUserKey(userKey);
+                // 设置到请求头中
+                mutate.header(HeaderConstant.HEADER_USER_KEY, userKey);
+            } catch (Exception e) {
+                log.error("GatewayAuthorizeFilter 无法解析 authorization = '" + authorization + "'", e);
+                return WebFluxUtils.writeToMono(response, RestResponse.failed("解析异常"));
+            }
+
+            ServerWebExchange mutableExchange = exchange.mutate().request(mutate.build()).build();
+            return chain.filter(mutableExchange);
         } catch (Exception e) {
-            log.error("[AuthorizeFilter] 无法解析 authorization = '" + authorization + "'", e);
-            return WebFluxUtils.writeToMono(response, RestResponse.failed("解析异常"));
+            log.error("GatewayAuthorizeFilter filter error ", e);
+            return WebFluxUtils.writeToMono(exchange.getResponse(), RestResponse.failed("服务器繁忙"));
         }
-
-        ServerWebExchange mutableExchange = exchange.mutate().request(mutate.build()).build();
-        return chain.filter(mutableExchange);
     }
 
     @Override
