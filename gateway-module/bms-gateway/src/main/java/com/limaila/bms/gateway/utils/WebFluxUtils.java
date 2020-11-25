@@ -25,8 +25,7 @@ import java.util.Objects;
 @Slf4j
 public class WebFluxUtils {
 
-    private WebFluxUtils() {
-    }
+    private WebFluxUtils() {}
 
 
     /**
@@ -36,7 +35,7 @@ public class WebFluxUtils {
      * @param data     数据
      * @return
      */
-    public static Mono<Void> writeToMono(ServerHttpResponse response, RestResponse data) {
+    public static Mono<Void> writeToMono(ServerHttpResponse response, RestResponse<?> data) {
         response.setStatusCode(HttpStatus.OK);
         response.getHeaders().add("Content-Type", "application/json;charset=UTF-8");
         DataBuffer dataBuffer = response.bufferFactory().wrap(JSON.toJSONString(data).getBytes());
