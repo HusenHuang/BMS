@@ -38,7 +38,7 @@ public class LockUtils {
      * @param <T>      泛型
      * @return
      */
-    public static <T> T toRun(String key, LockCallback<T> callback, boolean fair) {
+    public static <T> T run(String key, LockCallback<T> callback, boolean fair) {
         RLock lock = fair ? redissonClient.getFairLock(key) : redissonClient.getLock(key);
         lock.lock();
         try {

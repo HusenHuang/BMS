@@ -4,6 +4,7 @@ import org.apache.commons.lang.reflect.MethodUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationTargetException;
@@ -74,5 +75,13 @@ public class ApplicationUtils implements ApplicationContextAware {
     public static Object invokeMethod(String beanName, String methodName, Object ... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         Object bean = getBean(beanName);
         return MethodUtils.invokeMethod(bean, methodName, args);
+    }
+
+    /**
+     *
+     * @param event
+     */
+    public static void publishEvent(ApplicationEvent event) {
+        applicationContext.publishEvent(event);
     }
 }

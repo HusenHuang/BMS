@@ -24,7 +24,7 @@ public class SentinelBlockExceptionHandlerConfig {
     @Bean
     public BlockExceptionHandler blockExceptionHandler() {
         return (request, response, e) -> {
-            RestResponse rsp = sentinelBlockHandler(e);
+            RestResponse<?> rsp = sentinelBlockHandler(e);
             response.setCharacterEncoding("UTF-8");
             response.setHeader("Content-Type", "application/json;charset=utf-8");
             response.setContentType("application/json;charset=utf-8");
@@ -33,8 +33,8 @@ public class SentinelBlockExceptionHandlerConfig {
     }
 
 
-    private RestResponse sentinelBlockHandler(BlockException ex) {
-        RestResponse rsp;
+    private RestResponse<?> sentinelBlockHandler(BlockException ex) {
+        RestResponse<?> rsp;
         if (ex instanceof FlowException) {
             // 限流异常
             rsp = RestResponse.failed("FLOW");
