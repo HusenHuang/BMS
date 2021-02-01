@@ -43,6 +43,12 @@
             <version>${project.parent.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.limaila</groupId>
+            <artifactId>bms-mysql</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
 
         <!-- BMS-API -->
         <dependency>
@@ -56,6 +62,12 @@
             <groupId>com.limaila</groupId>
             <artifactId>bms-authority-api</artifactId>
             <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
