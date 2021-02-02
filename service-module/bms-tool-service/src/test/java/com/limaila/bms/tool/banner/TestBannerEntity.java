@@ -25,11 +25,11 @@ public class TestBannerEntity {
         entity.setName(uuid);
         entity.setLocation(1);
         entity.setUrl("http://www.s.com/" +  uuid);
-        System.out.println("add ------ " + bannerService.add(entity));
-        System.out.println("get ------" + bannerService.getById(entity.getId()));
+        System.out.println("add1 ------ " + bannerService.add(entity));
+        System.out.println("get1 ------" + bannerService.getById(entity.getId()));
         System.out.println("get2 ------" + bannerService.getById(entity.getId()));
         entity.setLocation(2);
-        System.out.println("updateByPrimaryKey ------" + bannerService.updateById(entity));
+        System.out.println("update1 ------" + bannerService.updateById(entity));
 //        Object de = ApplicationUtils.invokeMethod(IBannerService.class, "deleteById", entity.getId());
 //        System.out.println(de);
 //        RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();

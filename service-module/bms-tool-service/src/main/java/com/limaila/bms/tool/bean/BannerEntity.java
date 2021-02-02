@@ -2,7 +2,7 @@ package com.limaila.bms.tool.bean;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.limaila.bms.cache.extension.AssignId;
+import com.limaila.bms.cache.extension.id.AssignId;
 import lombok.*;
 
 @Getter

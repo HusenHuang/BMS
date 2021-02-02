@@ -1,4 +1,4 @@
-package com.limaila.bms.cache.extension;
+package com.limaila.bms.cache.extension.id;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

@@ -1,5 +1,6 @@
 package com.limaila.bms.cache.extension;
 
+import com.limaila.bms.cache.extension.id.PrimaryId;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 

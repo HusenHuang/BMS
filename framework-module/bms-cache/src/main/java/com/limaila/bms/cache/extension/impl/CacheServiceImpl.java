@@ -2,7 +2,7 @@ package com.limaila.bms.cache.extension.impl;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.limaila.bms.cache.extension.ICacheService;
-import com.limaila.bms.cache.extension.PrimaryId;
+import com.limaila.bms.cache.extension.id.PrimaryId;
 
 import java.io.Serializable;
 
