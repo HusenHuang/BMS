@@ -26,8 +26,8 @@ public class TestBannerEntity {
         entity.setLocation(1);
         entity.setUrl("http://www.s.com/" +  uuid);
         System.out.println("add ------ " + bannerService.add(entity));
-        System.out.println("get ------" + bannerService.getById(entity.getKeyId()));
-        System.out.println("get2 ------" + bannerService.getById(entity.getKeyId()));
+        System.out.println("get ------" + bannerService.getById(entity.getId()));
+        System.out.println("get2 ------" + bannerService.getById(entity.getId()));
         entity.setLocation(2);
         System.out.println("updateByPrimaryKey ------" + bannerService.updateById(entity));
 //        Object de = ApplicationUtils.invokeMethod(IBannerService.class, "deleteById", entity.getId());
