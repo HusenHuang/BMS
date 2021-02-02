@@ -18,9 +18,4 @@ public class BannerServiceImpl extends CacheServiceImpl<BannerEntity> implements
     public BaseMapper<BannerEntity> getBaseMapper() {
         return mapper;
     }
-
-    @Override
-    public String cacheKey() {
-        return "banner";
-    }
 }

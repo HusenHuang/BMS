@@ -10,8 +10,6 @@ public abstract class CacheServiceImpl<T extends PrimaryId> implements ICacheSer
 
     public abstract BaseMapper<T> getBaseMapper();
 
-    public abstract String cacheKey();
-
     @Override
     public T getById(Serializable id) {
         return getBaseMapper().selectById(id);
