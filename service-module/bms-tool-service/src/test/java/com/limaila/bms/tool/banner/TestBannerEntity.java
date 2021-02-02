@@ -1,6 +1,5 @@
 package com.limaila.bms.tool.banner;
 
-import com.limaila.bms.ApplicationUtils;
 import com.limaila.bms.tool.bean.BannerEntity;
 import com.limaila.bms.tool.service.IBannerService;
 import org.junit.Test;
@@ -27,13 +26,17 @@ public class TestBannerEntity {
         entity.setLocation(1);
         entity.setUrl("http://www.s.com/" +  uuid);
         System.out.println("add ------ " + bannerService.add(entity));
-        System.out.println("get ------" + bannerService.getByPrimaryKey(entity.getId()));
-        System.out.println("get2 ------" + bannerService.getByPrimaryKey(entity.getId()));
-
+        System.out.println("get ------" + bannerService.getById(entity.getKeyId()));
+        System.out.println("get2 ------" + bannerService.getById(entity.getKeyId()));
         entity.setLocation(2);
-        System.out.println("updateByPrimaryKey ------" + bannerService.updateByPrimaryKey(entity));
+        System.out.println("updateByPrimaryKey ------" + bannerService.updateById(entity));
+//        Object de = ApplicationUtils.invokeMethod(IBannerService.class, "deleteById", entity.getId());
+//        System.out.println(de);
+//        RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
+//        System.out.println(runtimeMXBean);
 
-        Object de = ApplicationUtils.invokeMethod(IBannerService.class, "deleteByPrimaryKey", entity.getId());
-        System.out.println(de);
+//        Sequence sequence = new Sequence();
+//        System.out.println(sequence);
     }
+
 }

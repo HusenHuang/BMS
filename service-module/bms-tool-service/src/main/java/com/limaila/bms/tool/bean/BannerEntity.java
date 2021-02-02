@@ -1,12 +1,9 @@
 package com.limaila.bms.tool.bean;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.limaila.bms.cache.extension.AssignId;
 import lombok.*;
-
-import java.io.Serializable;
 
 @Getter
 @Setter
@@ -14,10 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("bms_banner")
-public class BannerEntity implements Serializable {
-
-    @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
+public class BannerEntity extends AssignId {
 
     @TableField
     private String name;

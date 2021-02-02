@@ -1,4 +1,4 @@
-package com.limaila.bms;
+package com.limaila.bms.web;
 
 import org.apache.commons.lang.reflect.MethodUtils;
 import org.springframework.beans.BeansException;
