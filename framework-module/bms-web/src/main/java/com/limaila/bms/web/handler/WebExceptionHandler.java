@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /***
- 说明: 
+ 说明:
  @author MrHuang
  @date 2020/9/9 21:53
  @desc
@@ -21,8 +21,9 @@ public class WebExceptionHandler {
 
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
-    public RestResponse defaultErrorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) {
-        log.error("WebExceptionHandler ", e);
-        return RestResponse.failed("系统异常");
+    public RestResponse<?> defaultErrorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) throws Exception {
+//        log.error("Exception Handler ", e);
+        return RestResponse.failed(e.getMessage());
+//        throw e;
     }
 }

@@ -7,7 +7,6 @@ import com.limaila.bms.authority.bean.User;
 import com.limaila.bms.common.response.RestResponse;
 import com.limaila.bms.common.utils.BmsEnvCommon;
 import com.limaila.bms.common.utils.BmsSentinelRouteCommon;
-import com.limaila.bms.tool.bean.Banner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +29,7 @@ public class IndexController {
     @RequestMapping
     public RestResponse<?> index() {
         List<String> services = discoveryClient.getServices();
-        User user = userApi.getUserById(1L);
+        RestResponse<User> user = userApi.getUserById(1L);
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("services", services);
         map.put("user", user);

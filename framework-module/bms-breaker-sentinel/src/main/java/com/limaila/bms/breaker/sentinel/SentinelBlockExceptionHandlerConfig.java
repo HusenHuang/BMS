@@ -29,6 +29,7 @@ public class SentinelBlockExceptionHandlerConfig {
             response.setHeader("Content-Type", "application/json;charset=utf-8");
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(JSON.toJSONString(rsp));
+//            throw e;
         };
     }
 
