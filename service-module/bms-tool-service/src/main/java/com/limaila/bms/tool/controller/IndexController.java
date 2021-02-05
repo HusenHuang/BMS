@@ -29,7 +29,7 @@ public class IndexController {
     @RequestMapping
     public RestResponse<?> index() {
         List<String> services = discoveryClient.getServices();
-        RestResponse<User> user = userApi.getUserById(1L);
+        User user = userApi.getUserById(1L);
         Map<String, Object> map = Maps.newLinkedHashMap();
         map.put("services", services);
         map.put("user", user);

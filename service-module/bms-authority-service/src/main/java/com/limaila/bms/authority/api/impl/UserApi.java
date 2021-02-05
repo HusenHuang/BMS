@@ -2,7 +2,6 @@ package com.limaila.bms.authority.api.impl;
 
 import com.limaila.bms.authority.api.IUserApiMapping;
 import com.limaila.bms.authority.bean.User;
-import com.limaila.bms.common.response.RestResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +19,7 @@ public class UserApi implements IUserApiMapping {
     private static final User ROOT = new User(1L, "ROOT", 18);
 
     @Override
-    public RestResponse<User> getUserById(@RequestParam("userId") Long userId) {
+    public User getUserById(@RequestParam("userId") Long userId) {
 //        try {
 //            TimeUnit.SECONDS.sleep(1);
 //
