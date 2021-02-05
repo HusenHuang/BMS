@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RequestMapping("/api/user")
-public interface IUserApiMapping {
+public interface IUserMapping {
 
     /**
      * 根据用户ID查询用户信息

@@ -1,7 +1,8 @@
 package com.limaila.bms.authority.api.impl;
 
-import com.limaila.bms.authority.api.IUserApiMapping;
+import com.limaila.bms.authority.api.IUserMapping;
 import com.limaila.bms.authority.bean.User;
+import com.limaila.bms.common.exception.CommonException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Slf4j
-public class UserApi implements IUserApiMapping {
+public class UserApi implements IUserMapping {
 
     /**
      * ROOT 账号
@@ -26,7 +27,7 @@ public class UserApi implements IUserApiMapping {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
-        throw new RuntimeException("AAAA");
+        throw new CommonException("AAAA");
 //        return ROOT;
     }
 }

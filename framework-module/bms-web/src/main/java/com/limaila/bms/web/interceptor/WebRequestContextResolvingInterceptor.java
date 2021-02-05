@@ -28,16 +28,16 @@ public class WebRequestContextResolvingInterceptor implements HandlerInterceptor
             String contextJson = request.getHeader(HeaderConstant.HEADER_CONTEXT);
             if (StringUtils.isNotBlank(contextJson)) {
                 String decode = URLDecoder.decode(contextJson, "UTF-8");
-                log.info("当前请求头中的 requestContext:{}", contextJson);
+                log.info("当前请求头中附带的WebContext : {}", decode);
                 RequestContext.newInstance(JSONUtils.toBean(decode, RequestContext.class));
             } else {
-                log.info("当前请求中没有附带 requestContext");
+                log.info("当前请求头中没有附带WebContext");
             }
         } catch (Throwable e) {
-            log.error("解析requestContext 出现异常", e);
+            log.error("解析WebContext出现异常", e);
         }
-        log.info("rc ---- web = " + RequestContextHolder.getContext());
         RequestContextHolder.getContext().setRequestUri(request.getRequestURI());
+        log.info("上下文WebContext = {}", RequestContextHolder.getContext());
         return true;
     }
 

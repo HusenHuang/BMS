@@ -32,6 +32,6 @@ public class FeignRequestContextDeliveryInterceptor implements RequestIntercepto
                 log.error("ConsumerRequestInterceptor fail", e);
             }
         }
-        log.info("rc ---- consumer = " + JSON.toJSONString(context));
+        log.info("上下文WebContext = {}", context);
     }
 }
