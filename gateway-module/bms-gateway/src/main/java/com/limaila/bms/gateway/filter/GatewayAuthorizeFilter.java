@@ -2,6 +2,7 @@ package com.limaila.bms.gateway.filter;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.limaila.bms.common.constants.HeaderConstant;
+import com.limaila.bms.common.constants.RestCode;
 import com.limaila.bms.common.context.RequestContext;
 import com.limaila.bms.common.context.RequestContextHolder;
 import com.limaila.bms.common.response.RestResponse;
@@ -80,7 +81,7 @@ public class GatewayAuthorizeFilter implements GlobalFilter, Ordered {
             // 获取登录标识
             String authorization = request.getHeaders().getFirst(HeaderConstant.HEADER_AUTHORIZATION);
             if (StringUtils.isBlank(authorization)) {
-                return WebFluxUtils.writeToMono(response, RestResponse.failed("非法请求"));
+                return WebFluxUtils.writeToMono(response, RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "非法请求"));
             }
             // 解析登录标识
             try {
@@ -91,14 +92,14 @@ public class GatewayAuthorizeFilter implements GlobalFilter, Ordered {
                 mutate.header(HeaderConstant.HEADER_USER_KEY, userKey);
             } catch (Exception e) {
                 log.error("GatewayAuthorizeFilter 无法解析 authorization = '" + authorization + "'", e);
-                return WebFluxUtils.writeToMono(response, RestResponse.failed("解析异常"));
+                return WebFluxUtils.writeToMono(response, RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "解析异常"));
             }
 
             ServerWebExchange mutableExchange = exchange.mutate().request(mutate.build()).build();
             return chain.filter(mutableExchange);
         } catch (Exception e) {
             log.error("GatewayAuthorizeFilter filter error ", e);
-            return WebFluxUtils.writeToMono(exchange.getResponse(), RestResponse.failed("服务器繁忙"));
+            return WebFluxUtils.writeToMono(exchange.getResponse(), RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "服务器繁忙"));
         }
     }
 

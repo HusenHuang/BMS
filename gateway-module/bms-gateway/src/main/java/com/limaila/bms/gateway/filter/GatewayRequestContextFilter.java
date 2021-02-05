@@ -2,6 +2,7 @@ package com.limaila.bms.gateway.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.limaila.bms.common.constants.HeaderConstant;
+import com.limaila.bms.common.constants.RestCode;
 import com.limaila.bms.common.context.RequestContext;
 import com.limaila.bms.common.response.RestResponse;
 import com.limaila.bms.gateway.utils.WebFluxUtils;
@@ -31,7 +32,7 @@ public class GatewayRequestContextFilter implements GlobalFilter, Ordered {
             return chain.filter(mutableExchange);
         } catch (Exception e) {
             log.error("GatewayRequestContextFilter filter error ", e);
-            return WebFluxUtils.writeToMono(exchange.getResponse(), RestResponse.failed("服务器繁忙"));
+            return WebFluxUtils.writeToMono(exchange.getResponse(), RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "服务器繁忙"));
         }
     }
 

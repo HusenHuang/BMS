@@ -30,12 +30,12 @@ public class RestResponse<T> implements Serializable {
     /**
      * 请求失败返回的错误信息
      */
-    private String msg;
+    private String errorType;
 
     /**
      * 请求失败返回的错误备注
      */
-    private String remark;
+    private String msg;
 
     /**
      * 日志id
@@ -59,7 +59,7 @@ public class RestResponse<T> implements Serializable {
      * @return 响应体
      */
     public static RestResponse<?> success() {
-        return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), null, null);
+        return of(RestCode.SUCCESS.getTypeCode(), RestCode.SUCCESS.getTypeMsg(), null, null);
     }
 
     /**
@@ -69,46 +69,40 @@ public class RestResponse<T> implements Serializable {
      * @return 响应体
      */
     public static <T> RestResponse<T> success(T data) {
-        return of(RestCode.SUCCESS.getCode(), RestCode.SUCCESS.getMsg(), null, data);
+        return of(RestCode.SUCCESS.getTypeCode(), RestCode.SUCCESS.getTypeMsg(), null, data);
     }
 
 
-    /**
-     * 响应失败
-     *
-     * @param remark 备注
-     * @return
-     */
-    public static RestResponse<?> failed(String remark) {
-        return of(RestCode.FAILED.getCode(), RestCode.FAILED.getMsg(), remark, null);
-    }
-
-
-    /**
-     * 响应
-     *
-     * @param code   错误码
-     * @param msg    错误信息
-     * @param remark 错误备注
-     * @return
-     */
-    private static RestResponse<?> of(int code, String msg, String remark) {
-        return of(code, msg, remark, null);
+    public static RestResponse<?> failed(RestCode restCode, String msg) {
+        return of(restCode.getTypeCode(), restCode.getTypeMsg(), msg, null);
     }
 
     /**
      * 响应
      *
-     * @param code   错误码
-     * @param msg    错误信息
-     * @param remark 错误备注
-     * @param data   响应数据
+     * @param code      错误码
+     * @param errorType 错误类型
+     * @param msg       错误信息
      * @return
      */
-    private static <T> RestResponse<T> of(int code, String msg, String remark, T data) {
-        return RestResponse.<T>builder().code(code)
+    public static RestResponse<?> of(int code, String errorType, String msg) {
+        return of(code, errorType, msg, null);
+    }
+
+    /**
+     * 响应
+     *
+     * @param code      错误码
+     * @param msg       错误信息
+     * @param errorType 错误类型
+     * @param data      响应数据
+     * @return
+     */
+    public static <T> RestResponse<T> of(int code, String errorType, String msg, T data) {
+        return RestResponse.<T>builder()
+                .code(code)
+                .errorType(errorType)
                 .msg(msg)
-                .remark(remark)
                 .data(data)
                 .serverTime(System.currentTimeMillis())
                 .requestId(RequestContextHolder.getContext().getRequestId())

@@ -8,6 +8,7 @@ import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowException;
 import com.alibaba.csp.sentinel.slots.system.SystemBlockException;
 import com.alibaba.fastjson.JSON;
+import com.limaila.bms.common.constants.RestCode;
 import com.limaila.bms.common.response.RestResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,21 +39,21 @@ public class SentinelBlockExceptionHandlerConfig {
         RestResponse<?> rsp;
         if (ex instanceof FlowException) {
             // 限流异常
-            rsp = RestResponse.failed("FLOW");
+            rsp = RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "FLOW");
         } else if (ex instanceof DegradeException) {
             // 降级异常
-            rsp = RestResponse.failed("DEGRADE");
+            rsp = RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "DEGRADE");
         } else if (ex instanceof ParamFlowException) {
             // 热点参数异常
-            rsp = RestResponse.failed("PARAM_FLOW");
+            rsp = RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "PARAM_FLOW");
         } else if (ex instanceof SystemBlockException) {
             // 系统异常
-            rsp = RestResponse.failed("SYSTEM_BLOCK");
+            rsp = RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "SYSTEM_BLOCK");
         } else if (ex instanceof AuthorityException) {
             // 授权异常
-            rsp = RestResponse.failed("AUTHORITY_BLOCK");
+            rsp = RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "AUTHORITY_BLOCK");
         } else {
-            rsp = RestResponse.failed("FAILED");
+            rsp = RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "FAILED");
         }
         return rsp;
     }

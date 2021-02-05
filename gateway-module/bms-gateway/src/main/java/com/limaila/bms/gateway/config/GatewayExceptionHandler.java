@@ -2,11 +2,13 @@ package com.limaila.bms.gateway.config;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.limaila.bms.common.constants.RestCode;
 import com.limaila.bms.common.response.RestResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.boot.autoconfigure.web.reactive.error.DefaultErrorWebExceptionHandler;
+import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.reactive.error.ErrorAttributes;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -28,7 +30,7 @@ public class GatewayExceptionHandler extends DefaultErrorWebExceptionHandler {
     }
 
 
-    private static Map<String, Object> response(RestResponse rsp) {
+    private static Map<String, Object> response(RestResponse<?> rsp) {
         return JSON.parseObject(JSON.toJSONString(rsp), new TypeReference<LinkedHashMap<String, Object>>() {
         });
     }
@@ -36,30 +38,29 @@ public class GatewayExceptionHandler extends DefaultErrorWebExceptionHandler {
 
     private Map<String, Object> buildStatusResponse(HttpStatus status) {
         if (status.is4xxClientError()) {
-            return response(RestResponse.failed("资源无权访问"));
+            return response(RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "资源无权访问"));
         } else {
-            return response(RestResponse.failed("系统异常"));
+            return response(RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "系统异常"));
         }
     }
 
-    /**
-     * 获取异常属性
-     */
+
     @Override
-    protected Map<String, Object> getErrorAttributes(ServerRequest request, boolean includeStackTrace) {
+    protected Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions options) {
         Map<String, Object> response;
         Throwable error = super.getError(request);
         log.error("GatewayExceptionHandler ", error);
         if (error instanceof ResponseStatusException) {
             response = buildStatusResponse(((ResponseStatusException) error).getStatus());
         } else if (error instanceof org.springframework.cloud.gateway.support.TimeoutException) {
-            response = response(RestResponse.failed("系统异常"));
+            response = response(RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "系统异常"));
         } else if (error instanceof java.net.ConnectException) {
-            response = response(RestResponse.failed("系统异常"));
+            response = response(RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "系统异常"));
         } else {
-            response = response(RestResponse.failed("系统异常"));
+            response = response(RestResponse.failed(RestCode.INTERNAL_SERVER_ERROR, "系统异常"));
         }
         return response;
+
     }
 
     /**

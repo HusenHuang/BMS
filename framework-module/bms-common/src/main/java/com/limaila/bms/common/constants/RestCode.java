@@ -14,6 +14,12 @@ import lombok.Getter;
 public enum RestCode {
 
     /**
+     * 业务提示
+     */
+    TOAST(-1, "TOAST"),
+
+
+    /**
      * SUCCESS
      */
     SUCCESS(0, "SUCCESS"),
@@ -21,17 +27,23 @@ public enum RestCode {
     /**
      * 系统异常
      */
-    FAILED(2, "FAILED"),
+    INTERNAL_SERVER_ERROR(500, "INTERNAL_SERVER_ERROR"),
+
+
+    /**
+     * 系统异常
+     */
+    NOT_FOUND(404, "NOT_FOUND"),
 
     ;
 
     /**
      * CODE
      */
-    private int code;
+    private int typeCode;
 
     /**
      * CODE MSG
      */
-    private String msg;
+    private String typeMsg;
 }
