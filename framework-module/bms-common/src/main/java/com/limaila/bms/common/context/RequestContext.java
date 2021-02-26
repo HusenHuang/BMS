@@ -1,11 +1,11 @@
 package com.limaila.bms.common.context;
 
+import com.limaila.bms.common.id.IDUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 /***
  @author:MrHuang
@@ -60,7 +60,7 @@ public class RequestContext implements Serializable {
 
     public static RequestContext newInstance() {
         RequestContext rc = new RequestContext();
-        rc.setRequestId(UUID.randomUUID().toString());
+        rc.setRequestId(IDUtils.nextIdText());
         RequestContextHolder.setContext(rc);
         return rc;
     }
