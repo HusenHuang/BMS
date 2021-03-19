@@ -23,6 +23,7 @@
         <module>bms-json</module>
         <module>bms-xml</module>
         <module>bms-mysql</module>
+        <module>bms-mq</module>
     </modules>
 
 
