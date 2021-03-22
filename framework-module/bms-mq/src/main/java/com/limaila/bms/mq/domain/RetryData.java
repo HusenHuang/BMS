@@ -13,11 +13,23 @@ import java.io.Serializable;
 @Builder
 public class RetryData implements Serializable {
 
+    /**
+     * destination
+     */
     private String destination;
 
+    /**
+     * payload
+     */
     private String payload;
 
+    /**
+     * retryCount
+     */
     private Integer retryCount;
 
+    /**
+     * retryTime
+     */
     private String retryTime;
 }

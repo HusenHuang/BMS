@@ -15,14 +15,16 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class SchedulingTask {
 
+    protected static int MAC_COUNT = 100;
+
     @Scheduled(fixedDelay = 3000, initialDelay = 20000)
     public void pushRetryMessage() {
         log.debug("SchedulingTask pushRetryMessage ........ ");
-        int maxCount = 100;
+
         int count = 0;
         while (true) {
-            count++;
-            if (count >= maxCount) {
+            count ++;
+            if (count >= MAC_COUNT) {
                 // 跳过
                 break;
             }

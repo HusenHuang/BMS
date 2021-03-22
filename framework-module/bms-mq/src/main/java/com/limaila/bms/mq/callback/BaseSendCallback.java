@@ -14,9 +14,16 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 public class BaseSendCallback implements SendCallback {
 
+    /**
+     * destination
+     */
     private final String destination;
 
+    /**
+     * payload
+     */
     private final String payload;
+
 
     private final int retryCount;
 
@@ -41,7 +48,6 @@ public class BaseSendCallback implements SendCallback {
     public void onException(Throwable throwable) {
         log.info("BaseSendCallback onException destination = [{}] payload = [{}] throwable = [{}]", destination, payload, throwable);
         // 加入重发队列
-//        template.send
         int retryNum = retryCount + 1;
         RetryData retryData = RetryData.builder()
                 .destination(destination)
