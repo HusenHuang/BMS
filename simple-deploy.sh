@@ -22,3 +22,5 @@ cd /data/config/bms/BMS
 kubectl apply -f service-module/bms-tool-service/kubernetes/
 kubectl apply -f service-module/bms-authority-service/kubernetes/
 kubectl apply -f gateway-module/bms-gateway/kubernetes/
+
+# 5. over
