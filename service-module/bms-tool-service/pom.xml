@@ -75,5 +75,11 @@
             <artifactId>bms-mq</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.limaila</groupId>
+            <artifactId>bms-log</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
 </project>

@@ -24,19 +24,19 @@ public class BaseSendCallback implements SendCallback {
      */
     private final String payload;
 
-
+    /**
+     * retryCount
+     */
     private final int retryCount;
+
+    public BaseSendCallback(String destination, String payload) {
+        this(destination, payload, 0);
+    }
 
     public BaseSendCallback(String destination, String payload, int retryCount) {
         this.destination = destination;
         this.payload = payload;
         this.retryCount = retryCount;
-    }
-
-    public BaseSendCallback(String destination, String payload) {
-        this.destination = destination;
-        this.payload = payload;
-        this.retryCount = 0;
     }
 
     @Override

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/mq")
 public class MqController {
 
+
     @GetMapping("/async/{topic}/{payload}")
     public RestResponse<?> async(@PathVariable String topic, @PathVariable String payload) {
         MQUtils.asyncSend(topic, payload);

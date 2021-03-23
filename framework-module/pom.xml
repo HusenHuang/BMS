@@ -24,6 +24,7 @@
         <module>bms-xml</module>
         <module>bms-mysql</module>
         <module>bms-mq</module>
+        <module>bms-log</module>
     </modules>
 
 
